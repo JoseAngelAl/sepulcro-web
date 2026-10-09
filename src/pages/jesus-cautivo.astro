@@ -1,0 +1,62 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import cautivoImg from '../assets/img/jesus-cautivo/cautivo.jpg';
+
+const ficha = [
+  { campo: 'Titular', valor: 'Jesús Cautivo' },
+  { campo: 'Autor', valor: 'Victor García Villagordo' },
+  { campo: 'Año', valor: '2007' },
+  { campo: 'Material', valor: 'Madera de cedro del Líbano policromada' },
+  { campo: 'Incorporación', valor: '2008, Lunes Santo' },
+];
+---
+
+<BaseLayout
+  title="Jesús Cautivo"
+  description="Jesús Cautivo, imagen que procesiona el Lunes Santo en Monóvar."
+>
+  <PageHeader
+    title="Jesús Cautivo"
+    subtitle="La imagen que, desde 2008, incorporó el Lunes Santo al programa procesional monovero."
+    imagen={cautivoImg}
+    crumbs={[{ texto: 'La Cofradía' }, { texto: 'Jesús Cautivo' }]}
+  />
+
+  <section class="contenedor grid gap-12 py-16 lg:grid-cols-2 lg:py-20">
+    <div class="reveal flex flex-col justify-center lg:order-1">
+      <p class="sobretitulo">Imagen</p>
+      <h2 class="mt-3 titulo-seccion">Jesús Cautivo</h2>
+      <p class="prosa mt-4">
+        Jesús Cautivo, tallado en madera de cedro del Líbano, policromado, realizado en 2007 por Victor García
+        Villagordo. Escenifica la escena de Cristo presentado ante el pueblo, atado de manos.
+      </p>
+      <p class="prosa mt-4">
+        En 2008, gracias a la donación anónima de cuatro personas, la cofradía salió por primera vez en su historia el
+        Lunes Santo con la nueva imagen, incorporando un día más procesional a la Semana Santa monovera.
+      </p>
+
+      <dl class="mt-8 divide-y divide-morado/10 overflow-hidden rounded-2xl border border-morado/10 bg-white/70">
+        {
+          ficha.map((item) => (
+            <div class="flex items-center justify-between gap-4 px-6 py-3.5">
+              <dt class="text-sm font-semibold uppercase tracking-wide text-oro">{item.campo}</dt>
+              <dd class="text-right text-sm text-carbon-claro">{item.valor}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+
+    <div class="reveal overflow-hidden rounded-3xl shadow-elegante lg:order-2">
+      <Image
+        src={cautivoImg}
+        alt="Jesús Cautivo"
+        widths={[600, 900, 1200]}
+        loading="lazy"
+        class="h-full w-full object-cover"
+      />
+    </div>
+  </section>
+</BaseLayout>

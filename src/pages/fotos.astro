@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Gallery from '../components/Gallery.astro';
+
+import a1 from '../assets/img/fotos/a1.jpg';
+import f001 from '../assets/img/fotos/001.jpg';
+import cena1 from '../assets/img/fotos/cena1.jpg';
+import besa from '../assets/img/fotos/besa.jpg';
+import img0172 from '../assets/img/fotos/img_0172.jpg';
+import dscn0031 from '../assets/img/fotos/dscn0031.jpg';
+import f222 from '../assets/img/fotos/222.jpg';
+import dsc0001 from '../assets/img/fotos/dsc_0001.jpg';
+import dsc0226 from '../assets/img/procesiones/dsc0226.jpg';
+import dsc0084 from '../assets/img/procesiones/dsc0084.jpg';
+import p1 from '../assets/img/procesiones/p1.jpg';
+import banda4 from '../assets/img/banda/banda4.jpg';
+import banda5 from '../assets/img/banda/banda5.jpg';
+import banda7 from '../assets/img/banda/banda7.jpg';
+import costaleros615 from '../assets/img/costaleros/615.jpg';
+import costaleros645 from '../assets/img/costaleros/645.jpg';
+import costaleros2009 from '../assets/img/costaleros/costaleros2009.jpg';
+import sepulcro from '../assets/img/santo-sepulcro/ss1.jpg';
+import cautivo from '../assets/img/jesus-cautivo/cautivo.jpg';
+
+const imagenes = [
+  { src: a1, alt: 'Procesión de la cofradía' },
+  { src: sepulcro, alt: 'Cristo Yacente' },
+  { src: cautivo, alt: 'Jesús Cautivo' },
+  { src: dsc0226, alt: 'Paso del Santo Sepulcro' },
+  { src: dsc0084, alt: 'Procesión en Monóvar' },
+  { src: p1, alt: 'Cofrades en procesión' },
+  { src: banda4, alt: 'Banda de tambores y cornetas' },
+  { src: banda5, alt: 'Banda en la calle' },
+  { src: banda7, alt: 'Componentes de la banda' },
+  { src: costaleros615, alt: 'Costaleros' },
+  { src: costaleros645, alt: 'Cuadrilla de costaleros' },
+  { src: costaleros2009, alt: 'Costaleros 2009' },
+  { src: f001, alt: 'Fotos para el recuerdo' },
+  { src: cena1, alt: 'Cena de hermandad' },
+  { src: besa, alt: 'Beso a la imagen' },
+  { src: img0172, alt: 'Feria de Monóvar' },
+  { src: dscn0031, alt: 'Encuentro de bandas' },
+  { src: f222, alt: 'Procesión 2011' },
+  { src: dsc0001, alt: 'Procesión 2012' },
+];
+---
+
+<BaseLayout title="Fotos" description="Galería de fotos de la Cofradía del Santo Sepulcro de Monóvar.">
+  <PageHeader
+    title="Fotos"
+    subtitle="Momentos de nuestras procesiones, de la banda, de la cuadrilla de costaleros y de la vida de la cofradía."
+    crumbs={[{ texto: 'Multimedia' }, { texto: 'Fotos' }]}
+  />
+
+  <section class="contenedor py-16 lg:py-20">
+    <Gallery imagenes={imagenes} />
+
+    <div class="reveal mt-14 rounded-2xl border border-morado/10 bg-white/70 p-6 text-center text-sm text-carbon-claro">
+      ¿Tienes fotos relacionadas con la cofradía? Envíalas a
+      <a href="mailto:santosepulcromonovar@gmail.com" class="enlace-oro font-semibold">santosepulcromonovar@gmail.com</a>
+      y las publicaremos en esta sección.
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,63 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import { getCollection } from 'astro:content';
+
+import cautivoImg from '../../assets/img/jesus-cautivo/cautivo.jpg';
+import photoImg from '../../assets/img/poesias/photo.jpg';
+import lunes7Img from '../../assets/img/poesias/lunes7.jpg';
+import tnImg from '../../assets/img/poesias/tn_lpg_1000.jpg';
+import costalerosImg from '../../assets/img/poesias/costaleros.png';
+
+const imagenes = {
+  cautivo: cautivoImg,
+  photo: photoImg,
+  lunes7: lunes7Img,
+  tn_lpg_1000: tnImg,
+  costaleros: costalerosImg,
+} as const;
+
+const poesias = await getCollection('poesias');
+---
+
+<BaseLayout
+  title="Poesías dedicadas"
+  description="Poesías y oraciones dedicadas a Jesús Cautivo y al Santo Sepulcro de Monóvar."
+>
+  <PageHeader
+    title="Poesías dedicadas"
+    subtitle="Versos y oraciones que la cofradía y sus devotos dedican a nuestros titulares."
+    crumbs={[{ texto: 'Multimedia' }, { texto: 'Poesías dedicadas' }]}
+  />
+
+  <section class="contenedor py-16 lg:py-20">
+    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        poesias.map((poesia) => (
+          <a
+            href={`/poesias/${poesia.slug}`}
+            class="group flex flex-col overflow-hidden rounded-2xl border border-morado/10 bg-white/80 shadow-suave transition-all duration-300 hover:-translate-y-1 hover:shadow-elegante"
+          >
+            {poesia.data.image && (
+              <div class="aspect-[4/3] overflow-hidden">
+                <Image
+                  src={imagenes[poesia.data.image]}
+                  alt={poesia.data.title}
+                  widths={[400, 600, 800]}
+                  loading="lazy"
+                  class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+              </div>
+            )}
+            <div class="flex flex-1 flex-col p-6">
+              <h2 class="font-display text-xl font-semibold text-morado">{poesia.data.title}</h2>
+              {poesia.data.author && <p class="mt-1 text-xs font-semibold uppercase tracking-amplio text-oro">{poesia.data.author}</p>}
+              <span class="enlace-oro mt-4 text-sm font-semibold">Leer →</span>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

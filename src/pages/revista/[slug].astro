@@ -1,0 +1,45 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import { getCollection } from 'astro:content';
+
+import cover200 from '../../assets/img/revista/200.jpg';
+import cover600 from '../../assets/img/revista/600.jpg';
+import cover630 from '../../assets/img/revista/630.jpg';
+
+export async function getStaticPaths() {
+  const revistas = await getCollection('revista');
+  return revistas.map((revista) => ({
+    params: { slug: revista.slug },
+    props: { revista },
+  }));
+}
+
+const covers = { 200: cover200, 600: cover600, 630: cover630 } as const;
+
+const { revista } = Astro.props;
+const { Content } = await revista.render();
+---
+
+<BaseLayout title={revista.data.title} description={`${revista.data.title} de la Cofradía del Santo Sepulcro de Monóvar.`}>
+  <PageHeader
+    title={revista.data.title}
+    crumbs={[{ texto: 'Multimedia' }, { texto: 'Revista', href: '/revista' }, { texto: String(revista.data.year) }]}
+  />
+
+  <article class="contenedor mx-auto grid max-w-4xl gap-10 py-16 lg:grid-cols-[0.8fr_1.2fr] lg:py-20">
+    <div class="reveal overflow-hidden rounded-3xl shadow-suave">
+      <Image src={covers[revista.data.cover]} alt={revista.data.title} widths={[400, 700]} loading="lazy" class="w-full" />
+    </div>
+    <div class="reveal">
+      <div class="prosa">
+        <Content />
+      </div>
+      <p class="mt-8 rounded-2xl border border-dashed border-morado/20 bg-white/60 p-5 text-sm text-carbon-claro">
+        ¿Deseas consultar la revista completa? Próximamente publicaremos el PDF descargable de cada edición.
+      </p>
+      <a href="/revista" class="enlace-oro mt-8 inline-block text-sm font-semibold">← Volver a la revista</a>
+    </div>
+  </article>
+</BaseLayout>

@@ -1,0 +1,125 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --morado: #3d1f4e;
+    --oro: #c9a24b;
+    --crema: #f7f3ec;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-crema text-carbon font-sans antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display text-morado;
+  }
+
+  ::selection {
+    @apply bg-oro text-carbon;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-oro ring-offset-2 ring-offset-crema;
+  }
+}
+
+@layer components {
+  .contenedor {
+    @apply mx-auto w-full max-w-contenido px-5 sm:px-8;
+  }
+
+  .titulo-seccion {
+    @apply font-display text-3xl font-semibold leading-tight text-morado sm:text-4xl md:text-5xl;
+  }
+
+  .sobretitulo {
+    @apply text-xs font-semibold uppercase tracking-amplio text-oro;
+  }
+
+  .enlace-oro {
+    @apply relative inline-block text-oro transition-colors hover:text-oro-oscuro;
+  }
+
+  .enlace-oro::after {
+    content: '';
+    @apply absolute -bottom-0.5 left-0 h-px w-0 bg-current transition-all duration-300;
+  }
+
+  .enlace-oro:hover::after {
+    @apply w-full;
+  }
+
+  .boton {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold tracking-wide transition-all duration-300;
+  }
+
+  .boton-primario {
+    @apply boton bg-morado text-crema hover:bg-morado-oscuro hover:shadow-suave;
+  }
+
+  .boton-oro {
+    @apply boton bg-oro text-carbon hover:bg-oro-claro hover:shadow-suave;
+  }
+
+  .boton-borde {
+    @apply boton border border-morado/30 text-morado hover:border-morado hover:bg-morado hover:text-crema;
+  }
+
+  .tarjeta {
+    @apply rounded-2xl border border-morado/10 bg-white/80 p-6 shadow-suave backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:shadow-elegante;
+  }
+
+  .prosa {
+    @apply max-w-none text-base leading-relaxed text-carbon-claro;
+  }
+
+  .prosa p {
+    @apply mb-4;
+  }
+
+  .prosa h2 {
+    @apply mt-10 mb-4 font-display text-2xl font-semibold text-morado;
+  }
+
+  .prosa h3 {
+    @apply mt-8 mb-3 font-display text-xl font-semibold text-morado;
+  }
+
+  .prosa strong {
+    @apply font-semibold text-morado;
+  }
+}
+
+@layer utilities {
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}

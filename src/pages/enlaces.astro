@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { enlaces } from '../data/enlaces';
+
+import soledad from '../assets/img/enlaces/soledad.jpg';
+import cristo from '../assets/img/enlaces/cristo.gif';
+import nazareno from '../assets/img/enlaces/nazareno.jpg';
+import dolorosa from '../assets/img/enlaces/dolorosa.png';
+import semanasanta from '../assets/img/enlaces/semanasanta.jpg';
+
+const logos: Record<string, ImageMetadata> = { soledad, cristo, nazareno, dolorosa, semanasanta };
+
+const ordenados = [...enlaces].sort((a, b) => a.name.localeCompare(b.name));
+const categorias = [...new Set(ordenados.map((e) => e.category))];
+---
+
+<BaseLayout title="Enlaces" description="Enlaces a las cofradías de Monóvar y a la Semana Santa monovera.">
+  <PageHeader
+    title="Enlaces"
+    subtitle="Otras cofradías de Monóvar y webs relacionadas con la Semana Santa."
+    crumbs={[{ texto: 'Enlaces' }]}
+  />
+
+  <section class="contenedor py-16 lg:py-20">
+    {
+      categorias.map((categoria) => (
+        <div class="mb-14">
+          <h2 class="reveal sobretitulo">{categoria}</h2>
+          <div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {ordenados
+              .filter((e) => e.category === categoria)
+              .map((enlace) => (
+                <a
+                  href={enlace.url}
+                  target="_blank"
+                  rel="noopener"
+                  class="reveal group flex items-center gap-5 rounded-2xl border border-morado/10 bg-white/80 p-5 shadow-suave transition-all duration-300 hover:-translate-y-1 hover:shadow-elegante"
+                >
+                  {enlace.image && logos[enlace.image] && (
+                    <img
+                      src={logos[enlace.image].src}
+                      alt={enlace.name}
+                      class="h-16 w-16 shrink-0 rounded-xl object-contain"
+                      loading="lazy"
+                    />
+                  )}
+                  <span class="font-display text-lg font-semibold text-morado transition-colors group-hover:text-oro">
+                    {enlace.name}
+                  </span>
+                </a>
+              ))}
+          </div>
+        </div>
+      ))
+    }
+  </section>
+</BaseLayout>

@@ -1,0 +1,80 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+
+import estandarte2012 from '../assets/img/estandartes/new.jpg';
+import estandarte1995 from '../assets/img/estandartes/est.jpg';
+import estandarteBanda from '../assets/img/estandartes/est1.jpg';
+import crismon from '../assets/img/estandartes/xp.jpg';
+import cruzGuia from '../assets/img/estandartes/328.jpg';
+
+const piezas = [
+  {
+    titulo: 'Estandarte de la cofradía',
+    imagen: estandarte2012,
+    texto:
+      'Estandarte en terciopelo de algodón morado, bordado en diferentes tonalidades de oro, enriquecido con lentejuelas de oro, piedras de cristal y cordoncillos de oro fino. Realizado por el taller de bordados artísticos Paredes, de Guardamar del Segura. Bendecido el 5 de febrero de 2012, coincidiendo con el besapiés a Jesús Cautivo.',
+  },
+  {
+    titulo: 'Estandarte morado (1995)',
+    imagen: estandarte1995,
+    texto:
+      'Estandarte en terciopelo morado, bordado en oro, realizado en 1995 en Benejama, en sustitución del realizado en 1943.',
+  },
+  {
+    titulo: 'Estandarte de la banda',
+    imagen: estandarteBanda,
+    texto:
+      'Estandarte de la banda de tambores y cornetas, realizado en 2005 en Elda en raso blanco, con los instrumentos bordados.',
+  },
+  {
+    titulo: 'Crismón',
+    imagen: crismon,
+    texto:
+      'Crismón realizado en 2007 por Bordados Poveda de Monóvar, en terciopelo morado bordado en oro. Las letras griegas XP cruzadas significan "Hijo de Dios", acompañadas en los laterales por un Santo Grial o cáliz y el escudo de la cofradía. El número 313 simboliza el año en que la cristiandad dejó de ser prohibida y perseguida por los romanos.',
+  },
+  {
+    titulo: 'Cruz guía',
+    imagen: cruzGuia,
+    texto:
+      'La cruz guía abre el cortejo de la cofradía en cada procesión, guiando a los cofrades por las calles de Monóvar.',
+  },
+];
+---
+
+<BaseLayout
+  title="Insignias y Trono"
+  description="Insignias, estandartes, crismón y cruz guía de la Cofradía del Santo Sepulcro de Monóvar."
+>
+  <PageHeader
+    title="Insignias y Trono"
+    subtitle="El patrimonio que acompaña a la cofradía: estandartes bordados en oro, crismón y cruz guía."
+    crumbs={[{ texto: 'La Cofradía' }, { texto: 'Insignias y Trono' }]}
+  />
+
+  <section class="contenedor py-16 lg:py-20">
+    <div class="space-y-16">
+      {
+        piezas.map((pieza, indice) => (
+          <article class="reveal grid items-center gap-8 lg:grid-cols-2">
+            <div class:list={['overflow-hidden rounded-3xl shadow-suave', indice % 2 === 1 && 'lg:order-2']}>
+              <Image
+                src={pieza.imagen}
+                alt={pieza.titulo}
+                widths={[500, 800, 1100]}
+                loading="lazy"
+                class="h-full w-full object-cover"
+              />
+            </div>
+            <div class:list={[indice % 2 === 1 && 'lg:order-1']}>
+              <p class="sobretitulo">Patrimonio</p>
+              <h2 class="mt-3 font-display text-3xl font-semibold text-morado">{pieza.titulo}</h2>
+              <p class="mt-4 leading-relaxed text-carbon-claro">{pieza.texto}</p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

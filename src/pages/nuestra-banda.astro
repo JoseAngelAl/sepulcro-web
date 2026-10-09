@@ -1,0 +1,65 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { banda, responsableBanda, anioBanda } from '../data/banda';
+import bandaImg from '../assets/img/banda/647.jpg';
+import bandaImg2 from '../assets/img/banda/b12.jpg';
+import bandaImg3 from '../assets/img/banda/banda4.jpg';
+import bandaImg4 from '../assets/img/banda/banda7.jpg';
+---
+
+<BaseLayout
+  title="Nuestra Banda"
+  description="Banda de tambores y cornetas de la Cofradía del Santo Sepulcro de Monóvar."
+>
+  <PageHeader
+    title="Nuestra Banda"
+    subtitle="La música que acompaña a nuestros tronos por las calles de Monóvar."
+    imagen={bandaImg}
+    crumbs={[{ texto: 'Agrupación' }, { texto: 'Nuestra Banda' }]}
+  />
+
+  <section class="contenedor py-16 lg:py-20">
+    <div class="reveal grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        [bandaImg3, bandaImg2, bandaImg4, bandaImg].map((img, i) => (
+          <div class:list={['overflow-hidden rounded-2xl shadow-suave', i === 0 && 'sm:col-span-2 sm:row-span-2']}>
+            <Image src={img} alt="Banda de tambores y cornetas" widths={[400, 700]} loading="lazy" class="h-full w-full object-cover" />
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="bg-crema-oscuro/60 py-16 lg:py-20">
+    <div class="contenedor">
+      <div class="reveal flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
+        <div>
+          <p class="sobretitulo">Componentes</p>
+          <h2 class="titulo-seccion mt-3">La banda en {anioBanda}</h2>
+        </div>
+        <div class="rounded-2xl border border-morado/10 bg-white/80 px-6 py-4 text-sm shadow-suave">
+          <span class="text-carbon-claro">Responsable de la banda</span>
+          <span class="mt-1 block font-display text-lg font-semibold text-morado">{responsableBanda}</span>
+        </div>
+      </div>
+
+      <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {
+          banda.map((grupo) => (
+            <div class="reveal tarjeta">
+              <h3 class="font-display text-xl font-semibold text-morado">{grupo.instrumento}</h3>
+              <p class="mt-1 text-xs font-semibold uppercase tracking-amplio text-oro">
+                {grupo.componentes.length} componentes
+              </p>
+              <ul class="mt-4 grid grid-cols-1 gap-1.5 text-sm text-carbon-claro sm:grid-cols-2">
+                {grupo.componentes.map((componente) => <li>{componente}</li>)}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>

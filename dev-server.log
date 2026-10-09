@@ -1,0 +1,79 @@
+
+> sepulcro-web@0.0.1 dev
+> astro dev
+
+09:55:56 [types] Generated 18ms
+09:55:56 [vite] Re-optimizing dependencies because vite config has changed
+
+ astro  v4.16.19 ready in 1158 ms
+
+┃ Local    http://localhost:4321/
+┃ Network  use --host to expose
+
+09:55:57 watching for file changes...
+
+ update  ▶ New version of Astro available: 7.3.8
+  Run npx @astrojs/upgrade to update
+
+09:56:11 [200] / 110ms
+09:56:11 [200] /historia 11ms
+09:56:12 [200] /procesiones 8ms
+09:56:12 [200] /nuestra-banda 10ms
+09:56:12 [200] /fotos 13ms
+09:56:12 [200] /noticias 9ms
+09:56:13 [200] /poesias 7ms
+09:56:13 [200] /revista 9ms
+09:56:13 [200] /contacto 8ms
+09:56:13 [404] /sitemap-index.xml 7ms
+09:56:20 [200] / 10ms
+10:04:15 [200] / 48ms
+10:04:16 [200] /_image 124ms
+10:04:16 [200] /_image 157ms
+10:04:16 [200] /_image 163ms
+10:04:28 [200] /_image 15ms
+10:04:28 [200] /_image 57ms
+10:04:28 [200] /_image 50ms
+10:06:27 [200] /historia 16ms
+10:06:27 [200] /_image 37ms
+10:06:27 [200] /_image 33ms
+10:07:13 [200] /fotos 16ms
+10:07:13 [200] /_image 96ms
+10:07:13 [200] /_image 93ms
+10:07:13 [200] /_image 75ms
+10:07:13 [200] /_image 73ms
+10:07:13 [200] /_image 90ms
+10:07:13 [200] /_image 124ms
+10:07:13 [200] /_image 39ms
+10:07:13 [200] /_image 53ms
+10:07:13 [200] /_image 88ms
+10:07:13 [200] /_image 53ms
+10:07:13 [200] /_image 84ms
+10:07:13 [200] /_image 64ms
+10:07:13 [200] /_image 52ms
+10:07:13 [200] /_image 41ms
+10:07:13 [200] /_image 30ms
+10:07:13 [200] /_image 26ms
+10:10:47 [200] /costaleros 16ms
+10:11:04 [200] /nuestra-banda 13ms
+10:11:04 [200] /_image 29ms
+10:11:20 [200] /directiva 10ms
+10:11:40 [200] / 11ms
+10:11:46 [200] /procesiones 11ms
+10:11:46 [200] /_image 13ms
+10:12:09 [200] /poesias 12ms
+10:12:09 [200] /_image 18ms
+10:12:09 [200] /_image 24ms
+10:12:09 [200] /_image 46ms
+10:12:09 [200] /_image 41ms
+10:12:21 [200] /poesias/tunica-blanca 226ms
+10:12:32 [200] /poesias 20ms
+10:12:36 [200] / 14ms
+10:12:46 [200] /historia 10ms
+10:12:53 [200] / 12ms
+10:13:28 [200] / 19ms
+10:13:29 [200] /_image 135ms
+10:13:53 [200] /_image 34ms
+10:13:53 [200] /_image 39ms
+10:13:54 [200] /_image 23ms
+10:13:54 [200] /_image 55ms
+10:13:54 [200] /_image 65ms

@@ -1,0 +1,99 @@
+---
+interface Props {
+  fecha: string;
+  titulo: string;
+  dia: string;
+  hora: string;
+  lugar?: string;
+}
+
+const { fecha, titulo, dia, hora, lugar } = Astro.props;
+
+const unidades = [
+  { clave: 'dias', etiqueta: 'Días' },
+  { clave: 'horas', etiqueta: 'Horas' },
+  { clave: 'minutos', etiqueta: 'Minutos' },
+  { clave: 'segundos', etiqueta: 'Segundos' },
+];
+---
+
+<div
+  class="relative overflow-hidden rounded-3xl border border-oro/30 bg-morado-oscuro/95 p-7 text-crema shadow-elegante sm:p-10"
+  data-countdown
+  data-fecha={fecha}
+>
+  <div class="pointer-events-none absolute -right-16 -top-16 h-52 w-52 rounded-full bg-oro/10 blur-3xl"></div>
+
+  <div class="relative">
+    <p class="text-xs font-semibold uppercase tracking-amplio text-oro">Próxima cita</p>
+    <h3 class="mt-2 font-display text-2xl font-semibold text-crema sm:text-3xl">{titulo}</h3>
+    <p class="mt-1 text-sm text-crema/70">{dia} · {hora} h{lugar ? ` · ${lugar}` : ''}</p>
+
+    <div data-countdown-grid class="mt-7 grid grid-cols-4 gap-2 sm:gap-4">
+      {
+        unidades.map((u) => (
+          <div class="rounded-2xl border border-crema/10 bg-crema/5 px-2 py-4 text-center">
+            <span data-unidad={u.clave} class="block font-display text-3xl font-semibold tabular-nums text-oro sm:text-4xl">
+              00
+            </span>
+            <span class="mt-1 block text-[0.6rem] font-semibold uppercase tracking-amplio text-crema/60 sm:text-xs">
+              {u.etiqueta}
+            </span>
+          </div>
+        ))
+      }
+    </div>
+
+    <p data-countdown-mensaje class="mt-5 hidden text-center text-sm font-semibold text-oro"></p>
+  </div>
+</div>
+
+<script>
+  const contenedor = document.querySelector<HTMLElement>('[data-countdown]');
+
+  if (contenedor) {
+    const fechaObjetivo = new Date(contenedor.dataset.fecha || '').getTime();
+    const grid = contenedor.querySelector<HTMLElement>('[data-countdown-grid]');
+    const mensaje = contenedor.querySelector<HTMLElement>('[data-countdown-mensaje]');
+
+    const unidades = {
+      dias: contenedor.querySelector<HTMLElement>('[data-unidad="dias"]'),
+      horas: contenedor.querySelector<HTMLElement>('[data-unidad="horas"]'),
+      minutos: contenedor.querySelector<HTMLElement>('[data-unidad="minutos"]'),
+      segundos: contenedor.querySelector<HTMLElement>('[data-unidad="segundos"]'),
+    };
+
+    const rellenar = (valor: number) => String(valor).padStart(2, '0');
+
+    const actualizar = () => {
+      const ahora = Date.now();
+      let diff = fechaObjetivo - ahora;
+
+      if (Number.isNaN(fechaObjetivo) || diff <= 0) {
+        grid?.classList.add('hidden');
+        if (mensaje) {
+          mensaje.textContent =
+            diff <= 0 && !Number.isNaN(fechaObjetivo)
+              ? '¡Ha llegado el día! Que la Cofradía salga con gloria.'
+              : 'Fechas de procesión pendientes de confirmar.';
+          mensaje.classList.remove('hidden');
+        }
+        return;
+      }
+
+      const seg = Math.floor(diff / 1000);
+      const dias = Math.floor(seg / 86400);
+      const horas = Math.floor((seg % 86400) / 3600);
+      const minutos = Math.floor((seg % 3600) / 60);
+      const segundos = seg % 60;
+
+      if (unidades.dias) unidades.dias.textContent = rellenar(dias);
+      if (unidades.horas) unidades.horas.textContent = rellenar(horas);
+      if (unidades.minutos) unidades.minutos.textContent = rellenar(minutos);
+      if (unidades.segundos) unidades.segundos.textContent = rellenar(segundos);
+    };
+
+    actualizar();
+    window.setInterval(actualizar, 1000);
+  }
+</script>

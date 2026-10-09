@@ -1,0 +1,49 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import { getCollection } from 'astro:content';
+
+import cover200 from '../../assets/img/revista/200.jpg';
+import cover600 from '../../assets/img/revista/600.jpg';
+import cover630 from '../../assets/img/revista/630.jpg';
+
+const covers = { 200: cover200, 600: cover600, 630: cover630 } as const;
+
+const revistas = (await getCollection('revista')).sort((a, b) => b.data.year - a.data.year);
+---
+
+<BaseLayout title="Revista" description="Revistas de la Cofradía del Santo Sepulcro de Monóvar.">
+  <PageHeader
+    title="Revista"
+    subtitle="Publicación anual de la cofradía, con artículos, memorias y colaboraciones de sus cofrades."
+    crumbs={[{ texto: 'Multimedia' }, { texto: 'Revista' }]}
+  />
+
+  <section class="contenedor py-16 lg:py-20">
+    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        revistas.map((revista) => (
+          <a
+            href={`/revista/${revista.slug}`}
+            class="group flex flex-col overflow-hidden rounded-2xl border border-morado/10 bg-white/80 shadow-suave transition-all duration-300 hover:-translate-y-1 hover:shadow-elegante"
+          >
+            <div class="aspect-[3/4] overflow-hidden bg-morado/5">
+              <Image
+                src={covers[revista.data.cover]}
+                alt={revista.data.title}
+                widths={[300, 500]}
+                loading="lazy"
+                class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            </div>
+            <div class="p-6">
+              <h2 class="font-display text-2xl font-semibold text-morado">{revista.data.title}</h2>
+              <span class="enlace-oro mt-2 inline-block text-sm font-semibold">Ver revista →</span>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

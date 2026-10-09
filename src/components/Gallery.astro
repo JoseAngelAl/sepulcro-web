@@ -1,0 +1,109 @@
+---
+import { Image } from 'astro:assets';
+
+interface Imagen {
+  src: ImageMetadata;
+  alt: string;
+}
+
+interface Props {
+  imagenes: Imagen[];
+}
+
+const { imagenes } = Astro.props;
+---
+
+<div data-galeria class="columns-2 gap-4 sm:columns-3 md:columns-4 [&>*]:mb-4">
+  {
+    imagenes.map((imagen, indice) => (
+      <button
+        type="button"
+        class="group relative block w-full overflow-hidden rounded-xl shadow-suave"
+        data-galeria-item
+        data-indice={indice}
+        aria-label={`Ampliar: ${imagen.alt}`}
+      >
+        <Image
+          src={imagen.src}
+          alt={imagen.alt}
+          widths={[300, 500, 800]}
+          loading="lazy"
+          class="w-full object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+        <span class="absolute inset-0 bg-morado/0 transition-colors duration-300 group-hover:bg-morado/25"></span>
+      </button>
+    ))
+  }
+</div>
+
+<dialog
+  data-galeria-dialog
+  class="m-auto max-h-[92vh] max-w-[92vw] rounded-2xl bg-carbon/95 p-0 backdrop:bg-carbon/80 backdrop:backdrop-blur-sm"
+>
+  <div class="relative">
+    <img data-galeria-img src="" alt="" class="max-h-[85vh] max-w-[92vw] rounded-2xl object-contain" />
+    <button
+      type="button"
+      data-galeria-cerrar
+      class="absolute right-3 top-3 flex h-10 w-10 items-center justify-center rounded-full bg-crema/90 text-morado hover:bg-crema"
+      aria-label="Cerrar"
+    >
+      ✕
+    </button>
+    <button
+      type="button"
+      data-galeria-prev
+      class="absolute left-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-crema/80 text-2xl text-morado hover:bg-crema"
+      aria-label="Anterior"
+    >
+      ‹
+    </button>
+    <button
+      type="button"
+      data-galeria-next
+      class="absolute right-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-crema/80 text-2xl text-morado hover:bg-crema"
+      aria-label="Siguiente"
+    >
+      ›
+    </button>
+  </div>
+</dialog>
+
+<script>
+  const galeria = document.querySelector<HTMLElement>('[data-galeria]');
+  const dialog = document.querySelector<HTMLDialogElement>('[data-galeria-dialog]');
+  const img = document.querySelector<HTMLImageElement>('[data-galeria-img]');
+
+  if (galeria && dialog && img) {
+    const botones = Array.from(galeria.querySelectorAll<HTMLButtonElement>('[data-galeria-item]'));
+    const fuentes = botones.map((b) => b.querySelector('img')?.src || '');
+    let actual = 0;
+
+    const mostrar = (indice: number) => {
+      actual = (indice + fuentes.length) % fuentes.length;
+      img.src = fuentes[actual];
+      const alt = botones[actual].querySelector('img')?.alt || '';
+      img.alt = alt;
+    };
+
+    botones.forEach((boton, indice) => {
+      boton.addEventListener('click', () => {
+        mostrar(indice);
+        dialog.showModal();
+      });
+    });
+
+    dialog.querySelector('[data-galeria-cerrar]')?.addEventListener('click', () => dialog.close());
+    dialog.querySelector('[data-galeria-prev]')?.addEventListener('click', () => mostrar(actual - 1));
+    dialog.querySelector('[data-galeria-next]')?.addEventListener('click', () => mostrar(actual + 1));
+
+    dialog.addEventListener('click', (e) => {
+      if (e.target === dialog) dialog.close();
+    });
+
+    dialog.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') mostrar(actual - 1);
+      if (e.key === 'ArrowRight') mostrar(actual + 1);
+    });
+  }
+</script>

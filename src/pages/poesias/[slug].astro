@@ -1,0 +1,53 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import { getCollection } from 'astro:content';
+
+import cautivoImg from '../../assets/img/jesus-cautivo/cautivo.jpg';
+import photoImg from '../../assets/img/poesias/photo.jpg';
+import lunes7Img from '../../assets/img/poesias/lunes7.jpg';
+import tnImg from '../../assets/img/poesias/tn_lpg_1000.jpg';
+import costalerosImg from '../../assets/img/poesias/costaleros.png';
+
+export async function getStaticPaths() {
+  const poesias = await getCollection('poesias');
+  return poesias.map((poesia) => ({
+    params: { slug: poesia.slug },
+    props: { poesia },
+  }));
+}
+
+const imagenes = {
+  cautivo: cautivoImg,
+  photo: photoImg,
+  lunes7: lunes7Img,
+  tn_lpg_1000: tnImg,
+  costaleros: costalerosImg,
+} as const;
+
+const { poesia } = Astro.props;
+const { Content } = await poesia.render();
+---
+
+<BaseLayout title={poesia.data.title} description={`${poesia.data.title} — poesía dedicada a la Cofradía del Santo Sepulcro de Monóvar.`}>
+  <PageHeader
+    title={poesia.data.title}
+    subtitle={poesia.data.author ? `Poesía de ${poesia.data.author}` : undefined}
+    crumbs={[{ texto: 'Multimedia' }, { texto: 'Poesías', href: '/poesias' }, { texto: poesia.data.title }]}
+  />
+
+  <article class="contenedor mx-auto max-w-3xl py-16 lg:py-20">
+    {poesia.data.image && (
+      <figure class="reveal mx-auto mb-10 max-w-lg overflow-hidden rounded-3xl shadow-suave">
+        <Image src={imagenes[poesia.data.image]} alt={poesia.data.title} widths={[500, 800]} loading="lazy" class="w-full" />
+      </figure>
+    )}
+    <div class="reveal rounded-3xl border border-morado/10 bg-white/70 p-8 shadow-suave sm:p-12">
+      <div class="prosa font-display text-lg leading-loose text-carbon-claro sm:text-xl">
+        <Content />
+      </div>
+    </div>
+    <a href="/poesias" class="enlace-oro mt-10 inline-block text-sm font-semibold">← Volver a poesías</a>
+  </article>
+</BaseLayout>
