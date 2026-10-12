@@ -13,7 +13,7 @@ export const site = {
     youtube: 'https://www.youtube.com/results?search_query=santo+sepulcro+monovar',
   },
   youtube: {
-    videoDestacado: '9F5tS3RqVEs',
+    videoDestacado: 'vsFOsKKpvIs',
     titulo: 'Última salida de la Cofradía',
     descripcion:
       'Revive los momentos más emotivos de la última salida y entrada de nuestros tronos por las calles de Monóvar.',

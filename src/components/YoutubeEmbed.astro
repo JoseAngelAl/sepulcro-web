@@ -3,10 +3,11 @@ interface Props {
   videoId: string;
   titulo: string;
   canal?: string;
+  portada?: string;
 }
 
-const { videoId, titulo, canal } = Astro.props;
-const miniatura = `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`;
+const { videoId, titulo, canal, portada } = Astro.props;
+const miniatura = portada || `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`;
 const miniaturaAlt = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
 ---
 
