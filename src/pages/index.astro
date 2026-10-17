@@ -5,7 +5,7 @@ import Countdown from '../components/Countdown.astro';
 import YoutubeEmbed from '../components/YoutubeEmbed.astro';
 import Card from '../components/Card.astro';
 import { site } from '../data/site';
-import { getProximaProcesion } from '../data/procesiones';
+import { procesiones, getProximaProcesion } from '../data/procesiones';
 import { getCollection } from 'astro:content';
 
 import heroImg from '../assets/img/hero/cl.jpg';
@@ -16,12 +16,11 @@ import costalerosImg from '../assets/img/costaleros/645.jpg';
 import estandarteImg from '../assets/img/estandartes/new.jpg';
 
 const proxima = getProximaProcesion();
-const formateador = new Intl.DateTimeFormat('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
 
 const noticias = (await getCollection('noticias')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime()).slice(0, 2);
 
 const accesos = [
-  { href: '/historia', titulo: 'Nuestra historia', texto: 'Desde la fundación en 1940 hasta hoy.', imagen: heroImg, etiqueta: 'La Cofradía' },
+  { href: '/historia', titulo: 'Nuestra historia', texto: 'Desde la fundación en 1940 hasta hoy.', imagen: heroImg, etiqueta: 'La cofradía' },
   { href: '/santo-sepulcro', titulo: 'Santo Sepulcro', texto: 'El Cristo Yacente, titular de la cofradía.', imagen: sepulcroImg, etiqueta: 'Imágenes' },
   { href: '/jesus-cautivo', titulo: 'Jesús Cautivo', texto: 'Incorporado a la cofradía en 2008.', imagen: cautivoImg, etiqueta: 'Imágenes' },
   { href: '/nuestra-banda', titulo: 'Nuestra banda', texto: 'Tambores y cornetas de la cofradía.', imagen: bandaImg, etiqueta: 'Agrupación' },
@@ -31,46 +30,75 @@ const accesos = [
 ---
 
 <BaseLayout>
-  <section class="relative isolate flex min-h-[88vh] items-center overflow-hidden">
-    <Image
-      src={heroImg}
-      alt="Paso del Santo Sepulcro por las calles de Monóvar"
-      widths={[800, 1200, 1800, 2400]}
-      loading="eager"
-      class="absolute inset-0 -z-20 h-full w-full object-cover"
-    />
-    <div class="absolute inset-0 -z-10 bg-gradient-to-b from-morado-oscuro/80 via-morado-oscuro/60 to-morado/90"></div>
+  <section class="relative isolate overflow-hidden bg-noche">
+    <div class="contenedor grid grid-cols-1 items-center gap-14 py-20 sm:py-28 lg:grid-cols-[1.05fr_0.95fr] lg:py-32">
+      <div>
+        <p class="etiqueta animate-encender">Semana Santa en Monóvar</p>
+        <h1 class="animate-izar mt-5 font-display text-5xl font-medium leading-[0.98] tracking-tight text-lienzo sm:text-6xl md:text-7xl">
+          Santo Sepulcro<br />y Jesús Cautivo
+        </h1>
+        <span class="regla mt-8 w-24"></span>
+        <p class="mt-7 max-w-xl text-lg leading-relaxed text-lienzo/70">
+          Desde 1940 acompañamos al Cristo Yacente por las calles de Monóvar, viviendo y engrandeciendo la Semana Santa
+          de nuestro pueblo con devoción, banda y costaleros.
+        </p>
 
-    <div class="contenedor py-24 text-crema">
-      <p class="reveal sobretitulo text-oro">Monóvar · Semana Santa</p>
-      <h1 class="reveal mt-4 max-w-4xl font-display text-4xl font-semibold leading-[1.05] text-crema sm:text-6xl md:text-7xl">
-        Cofradía del Santo Sepulcro y Jesús Cautivo
-      </h1>
-      <p class="reveal mt-6 max-w-2xl text-lg leading-relaxed text-crema/80">
-        Desde 1940 acompañamos al Cristo Yacente por las calles de Monóvar, viviendo y engrandeciendo la Semana Santa
-        de nuestro pueblo con devoción, banda y costaleros.
-      </p>
-
-      <div class="reveal mt-9 flex flex-wrap gap-4">
-        <a href="/procesiones" class="boton-oro">Ver procesiones</a>
-        <a href="/historia" class="boton-borde border-crema/40 text-crema hover:bg-crema hover:text-morado">Conoce la cofradía</a>
+        <div class="mt-10 flex flex-wrap gap-4">
+          <a href="/procesiones" class="boton-primario">Ver procesiones</a>
+          <a href="/historia" class="boton-borde">Conoce la cofradía</a>
+        </div>
       </div>
 
-      {
-        proxima && (
-          <p class="reveal mt-10 text-sm text-crema/70">
-            Próxima procesión: <span class="font-semibold text-oro">{proxima.procesion.nombre}</span> · {formateador.format(proxima.fecha)}
-          </p>
-        )
-      }
+      <div class="animate-encender justify-self-stretch lg:justify-self-end">
+        <figure class="mx-auto max-w-md border border-candela/40 p-2 shadow-marco lg:max-w-none">
+          <Image
+            src={heroImg}
+            alt="Cristo Yacente de la Cofradía del Santo Sepulcro de Monóvar"
+            widths={[500, 800, 1100]}
+            loading="eager"
+            class="h-full w-full object-cover"
+          />
+          <figcaption class="px-2 pb-1 pt-4 text-center text-sm text-lienzo/60">
+            El Cristo Yacente, titular de la cofradía
+          </figcaption>
+        </figure>
+      </div>
     </div>
   </section>
 
-  <section class="contenedor -mt-14 pb-20 sm:-mt-16">
-    <div class="grid gap-8 lg:grid-cols-2 lg:items-stretch">
-      {
-        proxima ? (
-          <div class="reveal">
+  <section class="border-t border-lienzo/10 bg-noche-suave">
+    <div class="contenedor grid gap-14 py-20 lg:grid-cols-2 lg:gap-20 lg:py-24">
+      <div>
+        <p class="etiqueta">La estación de penitencia</p>
+        <h2 class="titulo-seccion mt-3">Dos días, dos tronos</h2>
+        <p class="mt-5 max-w-md leading-relaxed text-lienzo/65">
+          La cofradía sale dos veces cada Semana Santa: el Lunes Santo con Jesús Cautivo y el Viernes Santo con el Santo
+          Entierro. Así se vive el programa procesional de Monóvar.
+        </p>
+
+        <ol class="mt-10 space-y-8">
+          {
+            procesiones.map((procesion, indice) => (
+              <li class="grid grid-cols-[auto_1fr] gap-5 border-t border-lienzo/15 pt-6">
+                <span class="font-display text-3xl font-medium leading-none text-candela/45">
+                  {String(indice + 1).padStart(2, '0')}
+                </span>
+                <div>
+                  <p class="text-sm text-candela">{procesion.dia}, {procesion.hora} h</p>
+                  <h3 class="mt-1 font-display text-2xl font-medium text-lienzo">{procesion.nombre}</h3>
+                  <p class="mt-2 max-w-md text-sm leading-relaxed text-lienzo/60">{procesion.descripcion}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+
+        <a href="/procesiones" class="enlace-oro mt-9 inline-block text-sm font-semibold">Ver el programa completo</a>
+      </div>
+
+      <div>
+        {
+          proxima ? (
             <Countdown
               fecha={proxima.fecha.toISOString()}
               titulo={proxima.procesion.nombre}
@@ -78,86 +106,86 @@ const accesos = [
               hora={proxima.procesion.hora}
               lugar={proxima.procesion.salida}
             />
-          </div>
-        ) : null
-      }
-
-      <div class="reveal flex flex-col justify-center rounded-3xl border border-morado/10 bg-white/80 p-8 shadow-suave backdrop-blur sm:p-10">
-        <p class="sobretitulo">La última salida</p>
-        <h2 class="titulo-seccion mt-3">Vive la procesión</h2>
-        <p class="mt-4 max-w-md text-carbon-claro">
-          Revive, en vídeo, los momentos más emotivos de la última salida y entrada de nuestros tronos por las calles de
-          Monóvar.
-        </p>
-        <a href={site.youtube.canal} target="_blank" rel="noopener" class="enlace-oro mt-6 text-sm font-semibold">
-          Ver canal de YouTube →
-        </a>
+          ) : (
+            <p class="border border-candela/30 bg-noche-profunda p-7 text-lienzo/65">
+              Las fechas de la próxima procesión se publicarán aquí cuando el calendario de Semana Santa esté confirmado.
+            </p>
+          )
+        }
       </div>
     </div>
   </section>
 
-  <section class="contenedor pb-20">
-    <div class="reveal mx-auto max-w-3xl text-center">
-      <p class="sobretitulo">Vídeo destacado</p>
-      <h2 class="titulo-seccion mt-3">{site.youtube.titulo}</h2>
-      <p class="mt-4 text-carbon-claro">{site.youtube.descripcion}</p>
-    </div>
-    <div class="reveal mx-auto mt-10 max-w-4xl">
-      <YoutubeEmbed videoId={site.youtube.videoDestacado} titulo={site.youtube.titulo} canal={site.youtube.canal} portada="/videos/entrada-santo-sepulcro-2026.jpg" />
-    </div>
-  </section>
-
-  <section class="bg-crema-oscuro/60 py-20">
-    <div class="contenedor">
-      <div class="reveal mx-auto max-w-2xl text-center">
-        <p class="sobretitulo">Explora</p>
-        <h2 class="titulo-seccion mt-3">Todo sobre la cofradía</h2>
-      </div>
+  <section class="border-t border-lienzo/10 bg-noche">
+    <div class="contenedor py-20 lg:py-24">
+      <p class="etiqueta">Patrimonio y vida de la cofradía</p>
+      <h2 class="titulo-seccion mt-3 max-w-2xl">Todo lo que sostiene al Santo Sepulcro</h2>
       <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {accesos.map((acceso) => <div class="reveal"><Card {...acceso} /></div>)}
+        {accesos.map((acceso) => <Card {...acceso} />)}
       </div>
     </div>
   </section>
 
-  <section class="contenedor py-20">
-    <div class="reveal flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
-      <div>
-        <p class="sobretitulo">Actualidad</p>
-        <h2 class="titulo-seccion mt-3">Últimas noticias</h2>
+  <section class="border-t border-lienzo/10 bg-noche">
+    <div class="contenedor py-20 lg:py-24">
+      <div class="max-w-2xl">
+        <p class="etiqueta">Vídeo</p>
+        <h2 class="titulo-seccion mt-3">{site.youtube.titulo}</h2>
+        <p class="mt-5 leading-relaxed text-lienzo/65">{site.youtube.descripcion}</p>
       </div>
-      <a href="/noticias" class="enlace-oro text-sm font-semibold">Ver todas →</a>
-    </div>
-
-    <div class="mt-10 grid gap-6 md:grid-cols-2">
-      {
-        noticias.map((noticia) => (
-          <article class="reveal tarjeta">
-            <time class="sobretitulo" datetime={noticia.data.date.toISOString()}>
-              {formateador.format(noticia.data.date)}
-            </time>
-            <h3 class="mt-3 font-display text-2xl font-semibold text-morado">{noticia.data.title}</h3>
-            {noticia.data.resumen && <p class="mt-3 text-sm leading-relaxed text-carbon-claro">{noticia.data.resumen}</p>}
-            <a href={`/noticias/${noticia.slug}`} class="enlace-oro mt-4 inline-block text-sm font-semibold">
-              Leer más →
-            </a>
-          </article>
-        ))
-      }
+      <div class="mt-10">
+        <YoutubeEmbed
+          videoId={site.youtube.videoDestacado}
+          titulo={site.youtube.titulo}
+          canal={site.youtube.canal}
+          portada="/videos/entrada-santo-sepulcro-2026.jpg"
+        />
+      </div>
     </div>
   </section>
 
-  <section class="bg-morado py-20 text-crema">
-    <div class="contenedor reveal mx-auto max-w-3xl text-center">
-      <p class="sobretitulo text-oro">Únete a la cofradía</p>
-      <h2 class="mt-3 font-display text-3xl font-semibold text-crema sm:text-4xl">
-        Forma parte de la historia del Santo Sepulcro
-      </h2>
-      <p class="mt-4 text-crema/80">
-        Si compartes nuestra devoción, te esperamos. Escríbenos y te contaremos cómo participar en la cofradía.
-      </p>
-      <div class="mt-8 flex flex-wrap justify-center gap-4">
-        <a href="/contacto" class="boton-oro">Contactar</a>
-        <a href="/procesiones" class="boton-borde border-crema/40 text-crema hover:bg-crema hover:text-morado">Ver procesiones</a>
+  <section class="border-t border-lienzo/10 bg-noche">
+    <div class="contenedor py-20 lg:py-24">
+      <div class="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
+        <div>
+          <p class="etiqueta">Actualidad</p>
+          <h2 class="titulo-seccion mt-3">Últimas noticias</h2>
+        </div>
+        <a href="/noticias" class="enlace-oro text-sm font-semibold">Ver todas</a>
+      </div>
+
+      <div class="mt-12 grid gap-6 md:grid-cols-2">
+        {
+          noticias.map((noticia) => (
+            <article class="border border-lienzo/15 p-7">
+              <time class="etiqueta" datetime={noticia.data.date.toISOString()}>
+                {new Intl.DateTimeFormat('es-ES', { day: 'numeric', month: 'long', year: 'numeric' }).format(noticia.data.date)}
+              </time>
+              <h3 class="mt-3 font-display text-2xl font-medium text-lienzo">{noticia.data.title}</h3>
+              {noticia.data.resumen && <p class="mt-3 text-sm leading-relaxed text-lienzo/60">{noticia.data.resumen}</p>}
+              <a href={`/noticias/${noticia.slug}`} class="enlace-oro mt-5 inline-block text-sm font-semibold">
+                Leer la noticia
+              </a>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="border-t border-candela/30 bg-habito">
+    <div class="contenedor py-20 text-center">
+      <div class="mx-auto max-w-3xl">
+        <h2 class="font-display text-3xl font-medium text-lienzo sm:text-4xl">
+          Forma parte de la historia del Santo Sepulcro
+        </h2>
+        <p class="mt-5 leading-relaxed text-lienzo/75">
+          Si compartes nuestra devoción, te esperamos. Escríbenos y te contaremos cómo participar en la cofradía.
+        </p>
+        <div class="mt-9 flex flex-wrap justify-center gap-4">
+          <a href="/contacto" class="boton-primario">Contactar</a>
+          <a href="/procesiones" class="boton-borde">Ver procesiones</a>
+        </div>
       </div>
     </div>
   </section>

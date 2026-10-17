@@ -22,13 +22,15 @@ const formateador = new Intl.DateTimeFormat('es-ES', { day: 'numeric', month: 'l
     crumbs={[{ texto: 'Multimedia' }, { texto: 'Noticias', href: '/noticias' }, { texto: noticia.data.title }]}
   />
 
-  <article class="contenedor mx-auto max-w-3xl py-16 lg:py-20">
-    <time class="reveal sobretitulo" datetime={noticia.data.date.toISOString()}>
-      {formateador.format(noticia.data.date)} · {noticia.data.author}
-    </time>
-    <div class="prosa reveal mt-6">
-      <Content />
-    </div>
-    <a href="/noticias" class="enlace-oro mt-10 inline-block text-sm font-semibold">← Volver a noticias</a>
-  </article>
+  <section class="panel">
+    <article class="contenedor mx-auto max-w-3xl py-16 lg:py-20">
+      <time class="etiqueta" datetime={noticia.data.date.toISOString()}>
+        {formateador.format(noticia.data.date)}, {noticia.data.author}
+      </time>
+      <div class="prosa mt-7">
+        <Content />
+      </div>
+      <a href="/noticias" class="enlace-oro mt-12 inline-block text-sm font-semibold">Volver a noticias</a>
+    </article>
+  </section>
 </BaseLayout>

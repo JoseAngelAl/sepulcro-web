@@ -1,11 +1,12 @@
 ---
-import '@fontsource/inter/400.css';
-import '@fontsource/inter/500.css';
-import '@fontsource/inter/600.css';
-import '@fontsource/inter/700.css';
-import '@fontsource/cormorant-garamond/500.css';
-import '@fontsource/cormorant-garamond/600.css';
-import '@fontsource/cormorant-garamond/700.css';
+import '@fontsource/spectral/300.css';
+import '@fontsource/spectral/400.css';
+import '@fontsource/spectral/500.css';
+import '@fontsource/spectral/600.css';
+import '@fontsource/bodoni-moda/400.css';
+import '@fontsource/bodoni-moda/500.css';
+import '@fontsource/bodoni-moda/600.css';
+import '@fontsource/bodoni-moda/700.css';
 import '../styles/global.css';
 
 import Header from '../components/Header.astro';
@@ -19,7 +20,7 @@ interface Props {
 }
 
 const { title, description = site.descripcion, image } = Astro.props;
-const tituloCompleto = title ? `${title} · ${site.nombre}` : `${site.nombre} · ${site.localidad}`;
+const tituloCompleto = title ? `${title} — ${site.nombre}` : `${site.nombre}, ${site.localidad}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = image ? new URL(image, Astro.site) : undefined;
 ---
@@ -43,14 +44,14 @@ const ogImage = image ? new URL(image, Astro.site) : undefined;
     <meta property="og:url" content={canonical} />
     {ogImage && <meta property="og:image" content={ogImage} />}
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="theme-color" content="#3D1F4E" />
+    <meta name="theme-color" content="#171220" />
 
     <slot name="head" />
   </head>
   <body>
     <a
       href="#contenido"
-      class="absolute left-4 top-4 z-[60] -translate-y-24 rounded-full bg-morado px-4 py-2 text-sm font-semibold text-crema transition-transform focus:translate-y-0"
+      class="absolute left-4 top-4 z-[60] -translate-y-24 bg-candela px-4 py-2 text-sm font-semibold text-noche transition-transform focus:translate-y-0"
     >
       Saltar al contenido
     </a>
@@ -62,21 +63,5 @@ const ogImage = image ? new URL(image, Astro.site) : undefined;
     </main>
 
     <Footer />
-
-    <script>
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('visible');
-              observer.unobserve(entry.target);
-            }
-          });
-        },
-        { threshold: 0.12, rootMargin: '0px 0px -40px 0px' },
-      );
-
-      document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
-    </script>
   </body>
 </html>

@@ -23,8 +23,8 @@ const imagenes = { cautivo: cautivoProcesion, sepulcro: sepulcroProcesion };
     crumbs={[{ texto: 'Procesiones' }]}
   />
 
-  <section class="contenedor py-16 lg:py-20">
-    <div class="reveal mx-auto grid max-w-5xl gap-8 lg:grid-cols-2">
+  <section class="panel">
+    <div class="contenedor grid gap-12 py-16 lg:grid-cols-2 lg:items-center lg:py-20">
       <div class="prosa">
         <p>
           La cofradía del Santo Sepulcro procesiona por las calles de Monóvar desde el año 1942. Desde entonces y hasta
@@ -37,54 +37,52 @@ const imagenes = { cautivo: cautivoProcesion, sepulcro: sepulcroProcesion };
           por primera vez en su historia el Lunes Santo, incorporando un día más procesional a la Semana Santa monovera.
         </p>
       </div>
-      <figure class="overflow-hidden rounded-3xl shadow-suave">
+      <figure class="border border-habito/15">
         <Image src={crismonImg} alt="Crismón de la cofradía" widths={[400, 600]} loading="lazy" class="h-full w-full object-cover" />
       </figure>
     </div>
   </section>
 
-  <section class="bg-crema-oscuro/60 py-16 lg:py-20">
-    <div class="contenedor">
-      <div class="reveal mx-auto max-w-2xl text-center">
-        <p class="sobretitulo">Calendario</p>
+  <section class="border-t border-lienzo/10 bg-noche-suave">
+    <div class="contenedor py-20 lg:py-24">
+      <div class="max-w-2xl">
+        <p class="etiqueta">El programa</p>
         <h2 class="titulo-seccion mt-3">Nuestras procesiones</h2>
       </div>
 
-      <div class="mt-12 space-y-10">
+      <div class="mt-14 space-y-16">
         {
           procesiones.map((procesion, indice) => (
-            <article
-              class:list={[
-                'reveal grid items-center gap-8 overflow-hidden rounded-3xl border border-morado/10 bg-white/80 p-6 shadow-suave lg:grid-cols-2 lg:p-8',
-              ]}
-            >
-              <div class:list={['overflow-hidden rounded-2xl shadow-suave', indice % 2 === 1 && 'lg:order-2']}>
-                <Image
-                  src={imagenes[procesion.imagen]}
-                  alt={procesion.nombre}
-                  widths={[500, 800, 1100]}
-                  loading="lazy"
-                  class="h-full w-full object-cover"
-                />
-              </div>
-              <div class:list={[indice % 2 === 1 && 'lg:order-1']}>
-                <p class="sobretitulo">{procesion.dia}</p>
-                <h3 class="mt-2 font-display text-3xl font-semibold text-morado">{procesion.nombre}</h3>
-                <p class="mt-4 text-carbon-claro">{procesion.descripcion}</p>
-                <dl class="mt-6 space-y-2 text-sm">
-                  <div class="flex gap-2">
-                    <dt class="font-semibold text-oro">Hora:</dt>
-                    <dd class="text-carbon-claro">{procesion.hora} h</dd>
+            <article class="grid gap-8 border-t border-lienzo/15 pt-10 lg:grid-cols-2 lg:items-center">
+              <div class:list={[indice % 2 === 1 && 'lg:order-2']}>
+                <p class="etiqueta">{procesion.dia}</p>
+                <h3 class="mt-2 font-display text-3xl font-medium text-lienzo">{procesion.nombre}</h3>
+                <p class="mt-4 leading-relaxed text-lienzo/65">{procesion.descripcion}</p>
+                <dl class="mt-7 space-y-3 text-sm">
+                  <div class="flex gap-3">
+                    <dt class="w-24 shrink-0 text-candela">Hora</dt>
+                    <dd class="text-lienzo/70">{procesion.hora} h</dd>
                   </div>
-                  <div class="flex gap-2">
-                    <dt class="font-semibold text-oro">Salida:</dt>
-                    <dd class="text-carbon-claro">{procesion.salida}</dd>
+                  <div class="flex gap-3">
+                    <dt class="w-24 shrink-0 text-candela">Salida</dt>
+                    <dd class="text-lienzo/70">{procesion.salida}</dd>
                   </div>
-                  <div class="flex gap-2">
-                    <dt class="font-semibold text-oro">Itinerario:</dt>
-                    <dd class="text-carbon-claro">{procesion.itinerario}</dd>
+                  <div class="flex gap-3">
+                    <dt class="w-24 shrink-0 text-candela">Itinerario</dt>
+                    <dd class="text-lienzo/70">{procesion.itinerario}</dd>
                   </div>
                 </dl>
+              </div>
+              <div class:list={[indice % 2 === 1 && 'lg:order-1']}>
+                <div class="border border-candela/30 p-2">
+                  <Image
+                    src={imagenes[procesion.imagen]}
+                    alt={procesion.nombre}
+                    widths={[500, 800, 1100]}
+                    loading="lazy"
+                    class="h-full w-full object-cover"
+                  />
+                </div>
               </div>
             </article>
           ))
@@ -93,17 +91,21 @@ const imagenes = { cautivo: cautivoProcesion, sepulcro: sepulcroProcesion };
     </div>
   </section>
 
-  <section class="contenedor py-16 lg:py-20">
-    <div class="reveal mx-auto max-w-4xl rounded-3xl bg-morado p-8 text-crema sm:p-12">
-      <p class="sobretitulo text-oro">Las procesiones de Monóvar</p>
-      <p class="mt-4 leading-relaxed text-crema/85">
-        Las procesiones de Monóvar se caracterizan por la labor desempeñada por las bandas de tambores y cornetas que, a
-        base de ensayos, logran una calidad musical que atrae al público, así como la compenetración de los pasos con las
-        bandas, sobre todo en las entradas y salidas de los tronos, y la belleza de todas sus imágenes y tronos.
-      </p>
-      <div class="mt-8 grid gap-4 sm:grid-cols-2">
-        <Image src={procesion2} alt="Procesión del Santo Sepulcro" widths={[500, 900]} loading="lazy" class="rounded-2xl object-cover" />
-        <Image src={procesion1} alt="Banda en procesión" widths={[500, 900]} loading="lazy" class="rounded-2xl object-cover" />
+  <section class="border-t border-lienzo/10 bg-noche">
+    <div class="contenedor py-16 lg:py-20">
+      <div class="grid gap-10 border border-candela/30 bg-habito p-8 sm:p-12 lg:grid-cols-[1.2fr_1fr] lg:items-center">
+        <div>
+          <p class="etiqueta">Las procesiones de Monóvar</p>
+          <p class="mt-4 leading-relaxed text-lienzo/85">
+            Las procesiones de Monóvar se caracterizan por la labor desempeñada por las bandas de tambores y cornetas que, a
+            base de ensayos, logran una calidad musical que atrae al público, así como la compenetración de los pasos con las
+            bandas, sobre todo en las entradas y salidas de los tronos, y la belleza de todas sus imágenes y tronos.
+          </p>
+        </div>
+        <div class="grid gap-4 sm:grid-cols-2">
+          <Image src={procesion2} alt="Procesión del Santo Sepulcro" widths={[500, 900]} loading="lazy" class="border border-candela/30 object-cover" />
+          <Image src={procesion1} alt="Banda en procesión" widths={[500, 900]} loading="lazy" class="border border-candela/30 object-cover" />
+        </div>
       </div>
     </div>
   </section>

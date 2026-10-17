@@ -1,12 +1,13 @@
 ---
 import { site } from '../data/site';
+import Escudo from './Escudo.astro';
 
 const año = new Date().getFullYear();
 
 const enlacesRapidos = [
   { texto: 'Historia', href: '/historia' },
   { texto: 'Procesiones', href: '/procesiones' },
-  { texto: 'Nuestra Banda', href: '/nuestra-banda' },
+  { texto: 'Nuestra banda', href: '/nuestra-banda' },
   { texto: 'Costaleros', href: '/costaleros' },
   { texto: 'Noticias', href: '/noticias' },
 ];
@@ -20,72 +21,75 @@ const enlacesMultimedia = [
 ];
 ---
 
-<footer class="border-t border-morado/10 bg-morado text-crema">
-  <div class="contenedor grid gap-12 py-14 md:grid-cols-2 lg:grid-cols-4">
+<footer class="border-t border-candela/30 bg-noche-profunda text-lienzo">
+  <div class="contenedor grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-4">
     <div class="lg:col-span-1">
-      <p class="font-display text-2xl font-semibold text-crema">Santo Sepulcro</p>
-      <p class="mt-1 text-xs font-semibold uppercase tracking-amplio text-oro">{site.localidad} · {site.provincia}</p>
-      <p class="mt-5 text-sm leading-relaxed text-crema/70">
+      <div class="flex items-center gap-3">
+        <Escudo class="h-8 w-8 text-brasa" />
+        <p class="font-display text-2xl font-medium text-lienzo">Santo Sepulcro</p>
+      </div>
+      <p class="mt-2 text-xs tracking-wide text-candela">{site.localidad}, {site.provincia}</p>
+      <p class="mt-5 max-w-xs text-sm leading-relaxed text-lienzo/60">
         Desde 1940, guardando y engrandeciendo la Semana Santa de Monóvar tras el Cristo Yacente y Jesús Cautivo.
       </p>
     </div>
 
     <div>
-      <h3 class="text-xs font-semibold uppercase tracking-amplio text-oro">La Cofradía</h3>
-      <ul class="mt-4 space-y-2 text-sm">
+      <h3 class="text-sm font-semibold text-lienzo/90">La cofradía</h3>
+      <ul class="mt-4 space-y-2.5 text-sm">
         {enlacesRapidos.map((e) => (
           <li>
-            <a href={e.href} class="text-crema/80 transition-colors hover:text-oro">{e.texto}</a>
+            <a href={e.href} class="text-lienzo/60 transition-colors hover:text-candela">{e.texto}</a>
           </li>
         ))}
       </ul>
     </div>
 
     <div>
-      <h3 class="text-xs font-semibold uppercase tracking-amplio text-oro">Multimedia</h3>
-      <ul class="mt-4 space-y-2 text-sm">
+      <h3 class="text-sm font-semibold text-lienzo/90">Multimedia</h3>
+      <ul class="mt-4 space-y-2.5 text-sm">
         {enlacesMultimedia.map((e) => (
           <li>
-            <a href={e.href} class="text-crema/80 transition-colors hover:text-oro">{e.texto}</a>
+            <a href={e.href} class="text-lienzo/60 transition-colors hover:text-candela">{e.texto}</a>
           </li>
         ))}
       </ul>
     </div>
 
     <div>
-      <h3 class="text-xs font-semibold uppercase tracking-amplio text-oro">Contacto</h3>
-      <ul class="mt-4 space-y-2 text-sm text-crema/80">
+      <h3 class="text-sm font-semibold text-lienzo/90">Contacto</h3>
+      <ul class="mt-4 space-y-2.5 text-sm text-lienzo/60">
         <li>{site.contacto.iglesia}</li>
         <li>{site.contacto.direccion}</li>
         <li>
-          <a href={`mailto:${site.email}`} class="transition-colors hover:text-oro">{site.email}</a>
+          <a href={`mailto:${site.email}`} class="transition-colors hover:text-candela">{site.email}</a>
         </li>
       </ul>
       {
         site.redes.facebook || site.redes.instagram ? (
-          <div class="mt-5 flex gap-3">
+          <div class="mt-5 flex gap-4 text-sm">
             {site.redes.facebook && (
-              <a href={site.redes.facebook} class="text-crema/70 transition-colors hover:text-oro" aria-label="Facebook">
+              <a href={site.redes.facebook} class="text-lienzo/60 transition-colors hover:text-candela" aria-label="Facebook">
                 Facebook
               </a>
             )}
             {site.redes.instagram && (
-              <a href={site.redes.instagram} class="text-crema/70 transition-colors hover:text-oro" aria-label="Instagram">
+              <a href={site.redes.instagram} class="text-lienzo/60 transition-colors hover:text-candela" aria-label="Instagram">
                 Instagram
               </a>
             )}
           </div>
         ) : (
-          <a href="/contacto" class="boton-oro mt-5 px-5 py-2 text-xs">Escríbenos</a>
+          <a href="/contacto" class="enlace-oro mt-5 inline-block text-sm font-semibold">Escríbenos</a>
         )
       }
     </div>
   </div>
 
-  <div class="border-t border-crema/10">
-    <div class="contenedor flex flex-col items-center justify-between gap-2 py-5 text-xs text-crema/50 sm:flex-row">
+  <div class="border-t border-lienzo/10">
+    <div class="contenedor flex flex-col items-center justify-between gap-2 py-5 text-xs text-lienzo/45 sm:flex-row">
       <p>© {año} {site.nombreLargo}. Todos los derechos reservados.</p>
-      <p>Monóvar, Alicante · Semana Santa</p>
+      <p>Monóvar, Alicante. Semana Santa</p>
     </div>
   </div>
 </footer>

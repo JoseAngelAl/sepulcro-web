@@ -4,9 +4,11 @@
 
 @layer base {
   :root {
-    --morado: #3d1f4e;
-    --oro: #c9a24b;
-    --crema: #f7f3ec;
+    --noche: #171220;
+    --habito: #3b2350;
+    --lienzo: #f2f0ea;
+    --candela: #dfa23c;
+    --brasa: #b0242a;
   }
 
   html {
@@ -14,22 +16,22 @@
   }
 
   body {
-    @apply bg-crema text-carbon font-sans antialiased;
+    @apply bg-noche font-texto text-lienzo/80 antialiased;
   }
 
   h1,
   h2,
   h3,
   h4 {
-    @apply font-display text-morado;
+    @apply font-display font-medium text-lienzo;
   }
 
   ::selection {
-    @apply bg-oro text-carbon;
+    @apply bg-candela text-noche;
   }
 
   :focus-visible {
-    @apply outline-none ring-2 ring-oro ring-offset-2 ring-offset-crema;
+    @apply outline-none ring-2 ring-candela ring-offset-2 ring-offset-noche;
   }
 }
 
@@ -38,85 +40,105 @@
     @apply mx-auto w-full max-w-contenido px-5 sm:px-8;
   }
 
-  .titulo-seccion {
-    @apply font-display text-3xl font-semibold leading-tight text-morado sm:text-4xl md:text-5xl;
+  /* Superficie de lectura sobre lienzo (túnica). Aporta contraste a la base nocturna. */
+  .panel {
+    @apply bg-lienzo text-humo;
   }
 
-  .sobretitulo {
-    @apply text-xs font-semibold uppercase tracking-amplio text-oro;
+  .panel h1,
+  .panel h2,
+  .panel h3,
+  .panel h4 {
+    @apply text-habito;
+  }
+
+  .panel :focus-visible {
+    @apply ring-offset-lienzo;
+  }
+
+  /* Sobre lienzo el candela pierde contraste: el enlace pasa a morado con subrayado dorado. */
+  .panel .enlace-oro {
+    @apply text-habito decoration-candela/60 hover:decoration-habito;
+  }
+
+  .panel .etiqueta {
+    @apply text-candela-oscuro;
+  }
+
+  .titulo-seccion {
+    @apply font-display text-3xl font-medium leading-[1.08] tracking-tight sm:text-4xl md:text-5xl;
+  }
+
+  /* Etiqueta estructural: minúsculas, sin mayúsculas de plantilla. */
+  .etiqueta {
+    @apply font-texto text-xs font-medium tracking-wide text-candela;
+  }
+
+  /* Regla fina dorada: el "bordado" que sustituye a las flechas decorativas. */
+  .regla {
+    @apply block h-px w-full bg-candela/40;
   }
 
   .enlace-oro {
-    @apply relative inline-block text-oro transition-colors hover:text-oro-oscuro;
-  }
-
-  .enlace-oro::after {
-    content: '';
-    @apply absolute -bottom-0.5 left-0 h-px w-0 bg-current transition-all duration-300;
-  }
-
-  .enlace-oro:hover::after {
-    @apply w-full;
+    @apply text-candela underline decoration-candela/40 decoration-1 underline-offset-4 transition-colors hover:decoration-candela;
   }
 
   .boton {
-    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold tracking-wide transition-all duration-300;
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold tracking-wide transition-colors duration-200;
   }
 
   .boton-primario {
-    @apply boton bg-morado text-crema hover:bg-morado-oscuro hover:shadow-suave;
-  }
-
-  .boton-oro {
-    @apply boton bg-oro text-carbon hover:bg-oro-claro hover:shadow-suave;
+    @apply boton bg-candela text-noche hover:bg-candela-claro;
   }
 
   .boton-borde {
-    @apply boton border border-morado/30 text-morado hover:border-morado hover:bg-morado hover:text-crema;
+    @apply boton border border-lienzo/35 text-lienzo hover:border-candela hover:text-candela;
   }
 
   .tarjeta {
-    @apply rounded-2xl border border-morado/10 bg-white/80 p-6 shadow-suave backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:shadow-elegante;
+    @apply border border-habito/20 p-7;
   }
 
   .prosa {
-    @apply max-w-none text-base leading-relaxed text-carbon-claro;
+    @apply max-w-prosa text-base leading-relaxed;
   }
 
   .prosa p {
-    @apply mb-4;
+    @apply mb-5;
   }
 
   .prosa h2 {
-    @apply mt-10 mb-4 font-display text-2xl font-semibold text-morado;
+    @apply mb-4 mt-10 font-display text-2xl font-medium;
   }
 
   .prosa h3 {
-    @apply mt-8 mb-3 font-display text-xl font-semibold text-morado;
+    @apply mb-3 mt-8 font-display text-xl font-medium;
   }
 
   .prosa strong {
-    @apply font-semibold text-morado;
+    @apply font-semibold text-habito;
+  }
+
+  .prosa em {
+    @apply italic;
+  }
+}
+
+@layer base {
+  /* Evita el desbordamiento horizontal de las rejillas (blowout) en móvil. */
+  .grid > * {
+    min-width: 0;
   }
 }
 
 @layer utilities {
-  .reveal {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
-  }
-
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
+  /* Entrada orquestada única: se aplica solo a la pieza del cartel. */
   @media (prefers-reduced-motion: reduce) {
-    .reveal {
-      opacity: 1;
-      transform: none;
-      transition: none;
+    .animate-izar,
+    .animate-encender {
+      animation: none !important;
+      opacity: 1 !important;
+      letter-spacing: normal !important;
     }
     html {
       scroll-behavior: auto;

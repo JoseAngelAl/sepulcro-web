@@ -20,30 +20,32 @@ const revistas = (await getCollection('revista')).sort((a, b) => b.data.year - a
     crumbs={[{ texto: 'Multimedia' }, { texto: 'Revista' }]}
   />
 
-  <section class="contenedor py-16 lg:py-20">
-    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-      {
-        revistas.map((revista) => (
-          <a
-            href={`/revista/${revista.slug}`}
-            class="group flex flex-col overflow-hidden rounded-2xl border border-morado/10 bg-white/80 shadow-suave transition-all duration-300 hover:-translate-y-1 hover:shadow-elegante"
-          >
-            <div class="aspect-[3/4] overflow-hidden bg-morado/5">
-              <Image
-                src={covers[revista.data.cover]}
-                alt={revista.data.title}
-                widths={[300, 500]}
-                loading="lazy"
-                class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-            </div>
-            <div class="p-6">
-              <h2 class="font-display text-2xl font-semibold text-morado">{revista.data.title}</h2>
-              <span class="enlace-oro mt-2 inline-block text-sm font-semibold">Ver revista →</span>
-            </div>
-          </a>
-        ))
-      }
+  <section class="bg-noche">
+    <div class="contenedor py-16 lg:py-20">
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          revistas.map((revista) => (
+            <a
+              href={`/revista/${revista.slug}`}
+              class="group flex flex-col border border-lienzo/15 bg-white/[0.03] transition-colors hover:border-candela/60"
+            >
+              <div class="aspect-[3/4] overflow-hidden border-b border-lienzo/15">
+                <Image
+                  src={covers[revista.data.cover]}
+                  alt={revista.data.title}
+                  widths={[300, 500]}
+                  loading="lazy"
+                  class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                />
+              </div>
+              <div class="p-6">
+                <h2 class="font-display text-2xl font-medium text-lienzo">{revista.data.title}</h2>
+                <span class="enlace-oro mt-3 inline-block text-sm font-semibold">Ver la revista</span>
+              </div>
+            </a>
+          ))
+        }
+      </div>
     </div>
   </section>
 </BaseLayout>

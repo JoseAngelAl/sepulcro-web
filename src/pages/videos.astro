@@ -5,7 +5,7 @@ import YoutubeEmbed from '../components/YoutubeEmbed.astro';
 import { site } from '../data/site';
 
 const videos = [
-  { id: site.youtube.videoDestacado, titulo: 'Presentación de la Revista' },
+  { id: site.youtube.videoDestacado, titulo: 'Presentación de la revista' },
   { id: site.youtube.videoDestacado, titulo: 'Salida del Santo Entierro' },
   { id: site.youtube.videoDestacado, titulo: 'Procesión de Jesús Cautivo' },
 ];
@@ -18,25 +18,21 @@ const videos = [
     crumbs={[{ texto: 'Multimedia' }, { texto: 'Vídeos' }]}
   />
 
-  <section class="contenedor py-16 lg:py-20">
-    <div class="reveal mx-auto max-w-4xl">
-      <YoutubeEmbed videoId={site.youtube.videoDestacado} titulo={site.youtube.titulo} canal={site.youtube.canal} />
-    </div>
+  <section class="bg-noche">
+    <div class="contenedor py-16 lg:py-20">
+      <div class="mx-auto max-w-4xl">
+        <YoutubeEmbed videoId={site.youtube.videoDestacado} titulo={site.youtube.titulo} canal={site.youtube.canal} />
+      </div>
 
-    <div class="mx-auto mt-12 grid max-w-5xl gap-6 md:grid-cols-2">
-      {
-        videos.map((video) => (
-          <div class="reveal">
-            <YoutubeEmbed videoId={video.id} titulo={video.titulo} />
-          </div>
-        ))
-      }
-    </div>
+      <div class="mx-auto mt-12 grid max-w-5xl gap-6 md:grid-cols-2">
+        {videos.map((video) => <YoutubeEmbed videoId={video.id} titulo={video.titulo} />)}
+      </div>
 
-    <div class="reveal mx-auto mt-12 max-w-3xl text-center">
-      <a href={site.youtube.canal} target="_blank" rel="noopener" class="boton-primario">
-        Ver todos los vídeos en YouTube
-      </a>
+      <div class="mx-auto mt-12 max-w-3xl text-center">
+        <a href={site.youtube.canal} target="_blank" rel="noopener" class="boton-primario">
+          Ver todos los vídeos en YouTube
+        </a>
+      </div>
     </div>
   </section>
 </BaseLayout>

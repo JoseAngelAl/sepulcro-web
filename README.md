@@ -28,7 +28,7 @@ sepulcro-web/
 ├── public/                 → favicon.svg, robots.txt
 ├── src/
 │   ├── assets/img/         → imágenes descargadas y optimizadas
-│   ├── components/         → Header, Footer, Countdown, YoutubeEmbed, Gallery, Card...
+│   ├── components/         → Header, Footer, Countdown, YoutubeEmbed, Gallery, Card, Escudo...
 │   ├── content/            → colecciones: noticias, poesias, revista
 │   ├── data/               → site, directiva, banda, costaleros, procesiones, enlaces
 │   ├── layouts/            → BaseLayout.astro
@@ -90,10 +90,13 @@ Sustituye `https://formspree.io/f/tu-id-de-formspree` por tu endpoint real.
 
 ## Diseño
 
-Paleta basada en el hábito y la insignia (morado, blanco y oro), definida en `tailwind.config.mjs`:
+Identidad tomada del hábito y la luz de la procesión: noche morada, túnica blanca y ámbar de vela,
+definida en `tailwind.config.mjs`:
 
-- Morado `#3D1F4E` · Oro `#C9A24B` · Crema `#F7F3EC` · Carbón `#1E1B22`
-- Tipografías: **Cormorant Garamond** (títulos) e **Inter** (texto), autoalojadas vía `@fontsource`.
+- Noche `#171220` · Hábito `#3B2350` · Lienzo `#F2F0EA` · Candela `#DFA23C` · Brasa `#B0242A` · Humo `#6E6672`
+- Tipografías: **Bodoni Moda** (títulos, didone de cartel) y **Spectral** (texto), autoalojadas vía `@fontsource`.
+- La base es nocturna; las páginas de contenido se leen sobre «paneles» de lienzo (`.panel`).
+- El emblema recurrente es la **cruz potenzada** (`src/components/Escudo.astro`), dibujada en SVG.
 
 ## Pendiente
 

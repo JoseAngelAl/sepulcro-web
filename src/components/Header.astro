@@ -1,30 +1,25 @@
 ---
-import { Image } from 'astro:assets';
 import { navegacion, site } from '../data/site';
-import insignia from '../assets/img/simbolos/logotipoCruz.jpg';
+import Escudo from './Escudo.astro';
 
 const ruta = Astro.url.pathname;
 const esActivo = (href: string) => (href === '/' ? ruta === '/' : ruta.startsWith(href));
 const grupoActivo = (hijos: { href: string }[]) => hijos.some((h) => esActivo(h.href));
 ---
 
-<header class="sticky top-0 z-50 border-b border-morado/10 bg-crema/85 backdrop-blur-md">
+<header class="sticky top-0 z-50 border-b border-lienzo/10 bg-noche/90 backdrop-blur-sm">
+  <div class="h-px w-full bg-candela/50"></div>
+
   <div class="contenedor flex h-20 items-center justify-between gap-4">
     <a href="/" class="flex items-center gap-3" aria-label={`${site.nombreLargo} — Inicio`}>
-      <Image
-        src={insignia}
-        alt="Insignia de la cofradía"
-        width={88}
-        height={88}
-        class="h-11 w-11 shrink-0 rounded-full object-cover"
-      />
+      <Escudo class="h-9 w-9 shrink-0 text-brasa" />
       <span class="flex flex-col leading-none">
-        <span class="font-display text-xl font-semibold text-morado">Santo Sepulcro</span>
-        <span class="mt-1 text-[0.62rem] font-semibold uppercase tracking-amplio text-oro">{site.localidad}</span>
+        <span class="font-display text-xl font-medium text-lienzo">Santo Sepulcro</span>
+        <span class="mt-1 text-[0.66rem] tracking-wide text-candela">Monóvar, Semana Santa</span>
       </span>
     </a>
 
-    <nav class="hidden items-center gap-1 lg:flex" aria-label="Navegación principal">
+    <nav class="hidden items-center gap-7 lg:flex" aria-label="Navegación principal">
       {
         navegacion.map((item) =>
           'hijos' in item ? (
@@ -32,24 +27,24 @@ const grupoActivo = (hijos: { href: string }[]) => hijos.some((h) => esActivo(h.
               <button
                 type="button"
                 class:list={[
-                  'flex items-center gap-1 rounded-full px-3 py-2 text-sm font-medium transition-colors',
-                  grupoActivo(item.hijos) ? 'text-oro' : 'text-morado hover:text-oro',
+                  'flex items-center gap-1.5 py-2 text-sm transition-colors',
+                  grupoActivo(item.hijos) ? 'text-candela' : 'text-lienzo/75 hover:text-candela',
                 ]}
                 aria-haspopup="true"
               >
                 {item.texto}
-                <svg viewBox="0 0 12 12" class="h-3 w-3 transition-transform group-hover:rotate-180" aria-hidden="true">
+                <svg viewBox="0 0 12 12" class="h-2.5 w-2.5 transition-transform group-hover:rotate-180" aria-hidden="true">
                   <path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
                 </svg>
               </button>
-              <div class="invisible absolute left-0 top-full w-56 translate-y-2 pt-3 opacity-0 transition-all duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
-                <div class="overflow-hidden rounded-2xl border border-morado/10 bg-white p-2 shadow-elegante">
+              <div class="invisible absolute left-0 top-full w-56 translate-y-1 pt-4 opacity-0 transition-all duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
+                <div class="border border-lienzo/15 bg-noche-suave p-2 shadow-marco">
                   {item.hijos.map((hijo) => (
                     <a
                       href={hijo.href}
                       class:list={[
-                        'block rounded-xl px-4 py-2.5 text-sm transition-colors',
-                        esActivo(hijo.href) ? 'bg-morado/5 font-semibold text-oro' : 'text-morado hover:bg-morado/5',
+                        'block px-3 py-2.5 text-sm transition-colors',
+                        esActivo(hijo.href) ? 'text-candela' : 'text-lienzo/75 hover:bg-white/5 hover:text-candela',
                       ]}
                     >
                       {hijo.texto}
@@ -62,8 +57,10 @@ const grupoActivo = (hijos: { href: string }[]) => hijos.some((h) => esActivo(h.
             <a
               href={item.href}
               class:list={[
-                'rounded-full px-3 py-2 text-sm font-medium transition-colors',
-                esActivo(item.href) ? 'text-oro' : 'text-morado hover:text-oro',
+                'py-2 text-sm transition-colors',
+                esActivo(item.href)
+                  ? 'text-candela underline decoration-candela/60 decoration-1 underline-offset-4'
+                  : 'text-lienzo/75 hover:text-candela',
               ]}
             >
               {item.texto}
@@ -71,53 +68,54 @@ const grupoActivo = (hijos: { href: string }[]) => hijos.some((h) => esActivo(h.
           ),
         )
       }
-      <a href="/contacto" class="boton-oro ml-2 px-5 py-2 text-xs">Únete</a>
+      <a href="/contacto" class="boton-primario ml-2 px-5 py-2.5 text-xs">Hazte cofrade</a>
     </nav>
 
     <button
       id="menu-boton"
       type="button"
-      class="flex h-11 w-11 items-center justify-center rounded-full border border-morado/20 text-morado lg:hidden"
+      class="flex h-11 w-11 items-center justify-center border border-lienzo/25 text-lienzo lg:hidden"
       aria-expanded="false"
       aria-controls="menu-movil"
       aria-label="Abrir menú"
     >
       <svg id="menu-icono-abrir" viewBox="0 0 24 24" class="h-6 w-6" aria-hidden="true">
-        <path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+        <path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
       </svg>
       <svg id="menu-icono-cerrar" viewBox="0 0 24 24" class="hidden h-6 w-6" aria-hidden="true">
-        <path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+        <path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
       </svg>
     </button>
   </div>
 
-  <div id="menu-movil" class="hidden border-t border-morado/10 bg-crema lg:hidden">
-    <nav class="contenedor flex flex-col gap-1 py-4" aria-label="Navegación móvil">
+  <div id="menu-movil" class="hidden border-t border-lienzo/10 bg-noche lg:hidden">
+    <nav class="contenedor flex flex-col gap-1 py-5" aria-label="Navegación móvil">
       {
         navegacion.map((item) =>
           'hijos' in item ? (
-            <details class="group rounded-2xl border border-morado/10 bg-white/70 open:shadow-suave">
-              <summary class="flex cursor-pointer list-none items-center justify-between px-4 py-3 text-sm font-semibold text-morado">
+            <details class="group border-b border-lienzo/10">
+              <summary class="flex cursor-pointer list-none items-center justify-between py-3 text-sm font-semibold text-lienzo/85">
                 {item.texto}
-                <svg viewBox="0 0 12 12" class="h-3 w-3 transition-transform group-open:rotate-180" aria-hidden="true">
+                <svg viewBox="0 0 12 12" class="h-2.5 w-2.5 transition-transform group-open:rotate-180" aria-hidden="true">
                   <path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
                 </svg>
               </summary>
-              <div class="flex flex-col gap-1 px-2 pb-3">
+              <div class="flex flex-col pb-3">
                 {item.hijos.map((hijo) => (
-                  <a href={hijo.href} class="rounded-xl px-4 py-2.5 text-sm text-carbon-claro hover:bg-morado/5">
+                  <a href={hijo.href} class="py-2.5 pl-4 text-sm text-lienzo/70 hover:text-candela">
                     {hijo.texto}
                   </a>
                 ))}
               </div>
             </details>
           ) : (
-            <a href={item.href} class="rounded-2xl px-4 py-3 text-sm font-semibold text-morado hover:bg-morado/5">
+            <a href={item.href} class="border-b border-lienzo/10 py-3 text-sm font-semibold text-lienzo/85 hover:text-candela">
               {item.texto}
             </a>
           ),
         )
       }
+      <a href="/contacto" class="boton-primario mt-4 w-full">Hazte cofrade</a>
     </nav>
   </div>
 </header>

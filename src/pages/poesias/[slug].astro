@@ -37,17 +37,17 @@ const { Content } = await poesia.render();
     crumbs={[{ texto: 'Multimedia' }, { texto: 'Poesías', href: '/poesias' }, { texto: poesia.data.title }]}
   />
 
-  <article class="contenedor mx-auto max-w-3xl py-16 lg:py-20">
-    {poesia.data.image && (
-      <figure class="reveal mx-auto mb-10 max-w-lg overflow-hidden rounded-3xl shadow-suave">
-        <Image src={imagenes[poesia.data.image]} alt={poesia.data.title} widths={[500, 800]} loading="lazy" class="w-full" />
-      </figure>
-    )}
-    <div class="reveal rounded-3xl border border-morado/10 bg-white/70 p-8 shadow-suave sm:p-12">
-      <div class="prosa font-display text-lg leading-loose text-carbon-claro sm:text-xl">
+  <section class="panel">
+    <article class="contenedor mx-auto max-w-3xl py-16 lg:py-20">
+      {poesia.data.image && (
+        <figure class="mx-auto mb-12 max-w-lg border border-habito/15 p-2">
+          <Image src={imagenes[poesia.data.image]} alt={poesia.data.title} widths={[500, 800]} loading="lazy" class="w-full" />
+        </figure>
+      )}
+      <div class="prosa font-display text-lg leading-loose sm:text-xl">
         <Content />
       </div>
-    </div>
-    <a href="/poesias" class="enlace-oro mt-10 inline-block text-sm font-semibold">← Volver a poesías</a>
-  </article>
+      <a href="/poesias" class="enlace-oro mt-12 inline-block text-sm font-semibold">Volver a poesías</a>
+    </article>
+  </section>
 </BaseLayout>

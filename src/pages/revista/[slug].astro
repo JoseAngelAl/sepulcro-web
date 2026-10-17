@@ -28,18 +28,20 @@ const { Content } = await revista.render();
     crumbs={[{ texto: 'Multimedia' }, { texto: 'Revista', href: '/revista' }, { texto: String(revista.data.year) }]}
   />
 
-  <article class="contenedor mx-auto grid max-w-4xl gap-10 py-16 lg:grid-cols-[0.8fr_1.2fr] lg:py-20">
-    <div class="reveal overflow-hidden rounded-3xl shadow-suave">
-      <Image src={covers[revista.data.cover]} alt={revista.data.title} widths={[400, 700]} loading="lazy" class="w-full" />
-    </div>
-    <div class="reveal">
-      <div class="prosa">
-        <Content />
+  <section class="panel">
+    <article class="contenedor mx-auto grid max-w-4xl gap-10 py-16 lg:grid-cols-[0.8fr_1.2fr] lg:py-20">
+      <div class="border border-habito/15 p-2">
+        <Image src={covers[revista.data.cover]} alt={revista.data.title} widths={[400, 700]} loading="lazy" class="w-full" />
       </div>
-      <p class="mt-8 rounded-2xl border border-dashed border-morado/20 bg-white/60 p-5 text-sm text-carbon-claro">
-        ¿Deseas consultar la revista completa? Próximamente publicaremos el PDF descargable de cada edición.
-      </p>
-      <a href="/revista" class="enlace-oro mt-8 inline-block text-sm font-semibold">← Volver a la revista</a>
-    </div>
-  </article>
+      <div>
+        <div class="prosa">
+          <Content />
+        </div>
+        <p class="mt-9 border border-dashed border-habito/30 p-5 text-sm text-humo">
+          ¿Quieres consultar la revista completa? Próximamente publicaremos el PDF descargable de cada edición.
+        </p>
+        <a href="/revista" class="enlace-oro mt-8 inline-block text-sm font-semibold">Volver a la revista</a>
+      </div>
+    </article>
+  </section>
 </BaseLayout>

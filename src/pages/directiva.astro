@@ -1,8 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
+import Escudo from '../components/Escudo.astro';
 import { directiva } from '../data/directiva';
-import cruzImg from '../assets/img/simbolos/cruzpotenzada.jpg';
 
 const cuerpoDirectivo = directiva.filter((c) => c.tipo === 'directivo');
 const asesores = directiva.filter((c) => c.tipo === 'asesor');
@@ -15,47 +15,44 @@ const asesores = directiva.filter((c) => c.tipo === 'asesor');
   <PageHeader
     title="Directiva"
     subtitle="Actualmente la directiva de la Cofradía del Santo Sepulcro y Jesús Cautivo se compone de las siguientes personas."
-    crumbs={[{ texto: 'La Cofradía' }, { texto: 'Directiva' }]}
+    crumbs={[{ texto: 'La cofradía' }, { texto: 'Directiva' }]}
   />
 
-  <section class="contenedor py-16 lg:py-20">
-    <div class="grid gap-12 lg:grid-cols-[1.2fr_0.8fr]">
+  <section class="panel">
+    <div class="contenedor grid gap-12 py-16 lg:grid-cols-[1.2fr_0.8fr] lg:py-20">
       <div>
-        <h2 class="reveal sobretitulo">Junta directiva</h2>
-        <div class="mt-6 grid gap-5 sm:grid-cols-2">
+        <h2 class="etiqueta">Junta directiva</h2>
+        <div class="mt-6 grid gap-px border border-habito/15 bg-habito/15 sm:grid-cols-2">
           {
             cuerpoDirectivo.map((cargo) => (
-              <div class="reveal tarjeta">
-                <p class="text-xs font-semibold uppercase tracking-amplio text-oro">{cargo.cargo}</p>
-                <p class="mt-2 font-display text-xl font-semibold text-morado">{cargo.nombre}</p>
+              <div class="bg-lienzo p-6">
+                <p class="text-xs tracking-wide text-candela-oscuro">{cargo.cargo}</p>
+                <p class="mt-2 font-display text-xl font-medium text-habito">{cargo.nombre}</p>
               </div>
             ))
           }
         </div>
 
-        <h2 class="reveal sobretitulo mt-14">Asesores</h2>
-        <ul class="reveal mt-6 divide-y divide-morado/10 overflow-hidden rounded-2xl border border-morado/10 bg-white/70">
+        <h2 class="etiqueta mt-14">Asesores</h2>
+        <dl class="mt-6 border-t border-habito/15">
           {
             asesores.map((asesor) => (
-              <li class="flex items-center justify-between gap-4 px-6 py-4">
-                <span class="text-sm text-carbon-claro">{asesor.cargo}</span>
-                <span class="text-right font-medium text-morado">{asesor.nombre}</span>
-              </li>
+              <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-b border-habito/15 py-4">
+                <dt class="text-sm text-humo">{asesor.cargo}</dt>
+                <dd class="text-right font-medium text-habito">{asesor.nombre}</dd>
+              </div>
             ))
           }
-        </ul>
+        </dl>
       </div>
 
-      <aside class="reveal">
-        <div class="sticky top-28 overflow-hidden rounded-3xl border border-morado/10 bg-white/80 shadow-suave">
-          <img src={cruzImg.src} alt="Cruz potenzada, insignia de la cofradía" class="h-64 w-full object-cover" loading="lazy" />
-          <div class="p-6">
-            <p class="sobretitulo">La insignia</p>
-            <p class="mt-3 text-sm leading-relaxed text-carbon-claro">
-              Cruz potenzada con perfiles dorados y fondo rojo, puesta sobre un círculo blanco delimitado por
-              circunferencia dorada.
-            </p>
-          </div>
+      <aside class="lg:sticky lg:top-28 lg:self-start">
+        <div class="border border-habito/15 p-8 text-center">
+          <Escudo class="mx-auto h-24 w-24 text-brasa" />
+          <p class="mt-6 text-sm leading-relaxed text-humo">
+            Cruz potenzada con perfiles dorados y fondo rojo, puesta sobre un círculo blanco delimitado por
+            circunferencia dorada.
+          </p>
         </div>
       </aside>
     </div>

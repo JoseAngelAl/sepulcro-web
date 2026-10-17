@@ -18,41 +18,43 @@ import costalerosImg2 from '../assets/img/costaleros/615.jpg';
     crumbs={[{ texto: 'Agrupación' }, { texto: 'Costaleros' }]}
   />
 
-  <section class="contenedor py-16 lg:py-20">
-    <div class="reveal grid gap-6 md:grid-cols-3">
-      <div class="tarjeta">
-        <p class="sobretitulo">Manijero · Capataz</p>
-        <p class="mt-2 font-display text-xl font-semibold text-morado">{manijeroCapataz}</p>
-      </div>
-      <div class="tarjeta">
-        <p class="sobretitulo">Ayudante</p>
-        <p class="mt-2 font-display text-xl font-semibold text-morado">{ayudante}</p>
-      </div>
-      <div class="tarjeta">
-        <p class="sobretitulo">Pértigas</p>
-        <ul class="mt-2 space-y-1 text-sm text-carbon-claro">
-          {pertigas.map((p) => <li>{p}</li>)}
-        </ul>
-      </div>
-    </div>
-
-    <div class="mt-14 grid gap-12 lg:grid-cols-[1fr_1.4fr]">
-      <div class="reveal overflow-hidden rounded-3xl shadow-suave">
-        <Image
-          src={costalerosImg2}
-          alt="Costaleros de la cofradía"
-          widths={[500, 800, 1100]}
-          loading="lazy"
-          class="h-full w-full object-cover"
-        />
+  <section class="panel">
+    <div class="contenedor py-16 lg:py-20">
+      <div class="grid gap-6 md:grid-cols-3">
+        <div class="tarjeta">
+          <p class="etiqueta">Manijero y capataz</p>
+          <p class="mt-3 font-display text-xl font-medium text-habito">{manijeroCapataz}</p>
+        </div>
+        <div class="tarjeta">
+          <p class="etiqueta">Ayudante</p>
+          <p class="mt-3 font-display text-xl font-medium text-habito">{ayudante}</p>
+        </div>
+        <div class="tarjeta">
+          <p class="etiqueta">Pértigas</p>
+          <ul class="mt-3 space-y-1 text-sm text-humo">
+            {pertigas.map((p) => <li>{p}</li>)}
+          </ul>
+        </div>
       </div>
 
-      <div class="reveal">
-        <p class="sobretitulo">Cuadrilla</p>
-        <h2 class="mt-3 titulo-seccion">Costaleros {anioCostaleros}</h2>
-        <ul class="mt-8 grid grid-cols-1 gap-x-8 gap-y-2 rounded-2xl border border-morado/10 bg-white/70 p-6 text-sm text-carbon-claro sm:grid-cols-2 lg:grid-cols-3">
-          {costaleros.map((costalero) => <li>{costalero}</li>)}
-        </ul>
+      <div class="mt-14 grid gap-12 lg:grid-cols-[1fr_1.4fr] lg:items-start">
+        <div class="border border-habito/15 p-2">
+          <Image
+            src={costalerosImg2}
+            alt="Costaleros de la cofradía"
+            widths={[500, 800, 1100]}
+            loading="lazy"
+            class="h-full w-full object-cover"
+          />
+        </div>
+
+        <div>
+          <p class="etiqueta">Cuadrilla</p>
+          <h2 class="mt-3 titulo-seccion">Costaleros {anioCostaleros}</h2>
+          <ul class="mt-8 grid grid-cols-1 gap-x-8 gap-y-2 border border-habito/15 p-6 text-sm text-humo sm:grid-cols-2 lg:grid-cols-3">
+            {costaleros.map((costalero) => <li>{costalero}</li>)}
+          </ul>
+        </div>
       </div>
     </div>
   </section>

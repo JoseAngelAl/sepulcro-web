@@ -10,50 +10,50 @@ import bandaImg4 from '../assets/img/banda/banda7.jpg';
 ---
 
 <BaseLayout
-  title="Nuestra Banda"
+  title="Nuestra banda"
   description="Banda de tambores y cornetas de la Cofradía del Santo Sepulcro de Monóvar."
 >
   <PageHeader
-    title="Nuestra Banda"
+    title="Nuestra banda"
     subtitle="La música que acompaña a nuestros tronos por las calles de Monóvar."
     imagen={bandaImg}
-    crumbs={[{ texto: 'Agrupación' }, { texto: 'Nuestra Banda' }]}
+    crumbs={[{ texto: 'Agrupación' }, { texto: 'Nuestra banda' }]}
   />
 
-  <section class="contenedor py-16 lg:py-20">
-    <div class="reveal grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-      {
-        [bandaImg3, bandaImg2, bandaImg4, bandaImg].map((img, i) => (
-          <div class:list={['overflow-hidden rounded-2xl shadow-suave', i === 0 && 'sm:col-span-2 sm:row-span-2']}>
-            <Image src={img} alt="Banda de tambores y cornetas" widths={[400, 700]} loading="lazy" class="h-full w-full object-cover" />
-          </div>
-        ))
-      }
+  <section class="bg-noche">
+    <div class="contenedor py-16 lg:py-20">
+      <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          [bandaImg3, bandaImg2, bandaImg4, bandaImg].map((img, i) => (
+            <div class:list={['border border-lienzo/15', i === 0 && 'sm:col-span-2 sm:row-span-2']}>
+              <Image src={img} alt="Banda de tambores y cornetas" widths={[400, 700]} loading="lazy" class="h-full w-full object-cover" />
+            </div>
+          ))
+        }
+      </div>
     </div>
   </section>
 
-  <section class="bg-crema-oscuro/60 py-16 lg:py-20">
-    <div class="contenedor">
-      <div class="reveal flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
+  <section class="panel border-t border-habito/15">
+    <div class="contenedor py-16 lg:py-20">
+      <div class="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
         <div>
-          <p class="sobretitulo">Componentes</p>
+          <p class="etiqueta">Componentes</p>
           <h2 class="titulo-seccion mt-3">La banda en {anioBanda}</h2>
         </div>
-        <div class="rounded-2xl border border-morado/10 bg-white/80 px-6 py-4 text-sm shadow-suave">
-          <span class="text-carbon-claro">Responsable de la banda</span>
-          <span class="mt-1 block font-display text-lg font-semibold text-morado">{responsableBanda}</span>
+        <div class="border border-habito/20 px-6 py-4 text-sm">
+          <span class="text-humo">Responsable de la banda</span>
+          <span class="mt-1 block font-display text-lg font-medium text-habito">{responsableBanda}</span>
         </div>
       </div>
 
       <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {
           banda.map((grupo) => (
-            <div class="reveal tarjeta">
-              <h3 class="font-display text-xl font-semibold text-morado">{grupo.instrumento}</h3>
-              <p class="mt-1 text-xs font-semibold uppercase tracking-amplio text-oro">
-                {grupo.componentes.length} componentes
-              </p>
-              <ul class="mt-4 grid grid-cols-1 gap-1.5 text-sm text-carbon-claro sm:grid-cols-2">
+            <div class="tarjeta">
+              <h3 class="font-display text-xl font-medium text-habito">{grupo.instrumento}</h3>
+              <p class="mt-1 text-xs tracking-wide text-candela-oscuro">{grupo.componentes.length} componentes</p>
+              <ul class="mt-4 grid grid-cols-1 gap-1.5 text-sm text-humo sm:grid-cols-2">
                 {grupo.componentes.map((componente) => <li>{componente}</li>)}
               </ul>
             </div>

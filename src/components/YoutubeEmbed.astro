@@ -12,7 +12,7 @@ const miniaturaAlt = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
 ---
 
 <div
-  class="group relative aspect-video overflow-hidden rounded-3xl border border-oro/20 bg-carbon shadow-elegante"
+  class="group relative aspect-video overflow-hidden border border-candela/30 bg-noche-profunda shadow-marco"
   data-video
   data-id={videoId}
   data-titulo={titulo}
@@ -27,22 +27,22 @@ const miniaturaAlt = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
       src={miniatura}
       alt=""
       loading="lazy"
-      class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+      class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
       onerror={`this.onerror=null;this.src='${miniaturaAlt}'`}
     />
-    <span class="absolute inset-0 bg-gradient-to-t from-carbon/80 via-carbon/20 to-transparent"></span>
+    <span class="absolute inset-0 bg-gradient-to-t from-noche-profunda/90 via-noche-profunda/20 to-transparent"></span>
     <span
-      class="relative flex h-20 w-20 items-center justify-center rounded-full bg-oro text-carbon shadow-elegante transition-transform duration-300 group-hover:scale-110"
+      class="relative flex h-16 w-16 items-center justify-center border border-candela bg-noche/60 text-candela transition-colors duration-300 group-hover:bg-candela group-hover:text-noche"
     >
-      <svg viewBox="0 0 24 24" class="ml-1 h-9 w-9" aria-hidden="true">
+      <svg viewBox="0 0 24 24" class="ml-1 h-7 w-7" aria-hidden="true">
         <path d="M8 5v14l11-7z" fill="currentColor" />
       </svg>
     </span>
   </button>
 
   <div class="pointer-events-none absolute bottom-0 left-0 z-10 p-6">
-    <p class="text-xs font-semibold uppercase tracking-amplio text-oro">YouTube</p>
-    <p class="mt-1 font-display text-xl font-semibold text-crema sm:text-2xl">{titulo}</p>
+    <p class="text-xs tracking-wide text-candela">YouTube</p>
+    <p class="mt-1 font-display text-xl font-medium text-lienzo sm:text-2xl">{titulo}</p>
   </div>
 </div>
 

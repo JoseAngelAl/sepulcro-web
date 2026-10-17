@@ -53,13 +53,15 @@ const imagenes = [
     crumbs={[{ texto: 'Multimedia' }, { texto: 'Fotos' }]}
   />
 
-  <section class="contenedor py-16 lg:py-20">
-    <Gallery imagenes={imagenes} />
+  <section class="bg-noche">
+    <div class="contenedor py-16 lg:py-20">
+      <Gallery imagenes={imagenes} />
 
-    <div class="reveal mt-14 rounded-2xl border border-morado/10 bg-white/70 p-6 text-center text-sm text-carbon-claro">
-      ¿Tienes fotos relacionadas con la cofradía? Envíalas a
-      <a href="mailto:santosepulcromonovar@gmail.com" class="enlace-oro font-semibold">santosepulcromonovar@gmail.com</a>
-      y las publicaremos en esta sección.
+      <div class="mt-14 border border-lienzo/15 p-6 text-center text-sm text-lienzo/65">
+        ¿Tienes fotos relacionadas con la cofradía? Envíalas a
+        <a href="mailto:santosepulcromonovar@gmail.com" class="enlace-oro font-semibold">santosepulcromonovar@gmail.com</a>
+        y las publicaremos en esta sección.
+      </div>
     </div>
   </section>
 </BaseLayout>

@@ -48,17 +48,17 @@ const piezas = [
   description="Insignias, estandartes, crismón y cruz guía de la Cofradía del Santo Sepulcro de Monóvar."
 >
   <PageHeader
-    title="Insignias y Trono"
+    title="Insignias y trono"
     subtitle="El patrimonio que acompaña a la cofradía: estandartes bordados en oro, crismón y cruz guía."
-    crumbs={[{ texto: 'La Cofradía' }, { texto: 'Insignias y Trono' }]}
+    crumbs={[{ texto: 'La cofradía' }, { texto: 'Insignias y trono' }]}
   />
 
-  <section class="contenedor py-16 lg:py-20">
-    <div class="space-y-16">
+  <section class="panel">
+    <div class="contenedor space-y-16 py-16 lg:py-20">
       {
         piezas.map((pieza, indice) => (
-          <article class="reveal grid items-center gap-8 lg:grid-cols-2">
-            <div class:list={['overflow-hidden rounded-3xl shadow-suave', indice % 2 === 1 && 'lg:order-2']}>
+          <article class="grid items-center gap-8 lg:grid-cols-2">
+            <div class:list={['border border-habito/15 p-2', indice % 2 === 1 && 'lg:order-2']}>
               <Image
                 src={pieza.imagen}
                 alt={pieza.titulo}
@@ -68,9 +68,8 @@ const piezas = [
               />
             </div>
             <div class:list={[indice % 2 === 1 && 'lg:order-1']}>
-              <p class="sobretitulo">Patrimonio</p>
-              <h2 class="mt-3 font-display text-3xl font-semibold text-morado">{pieza.titulo}</h2>
-              <p class="mt-4 leading-relaxed text-carbon-claro">{pieza.texto}</p>
+              <h2 class="font-display text-3xl font-medium text-habito">{pieza.titulo}</h2>
+              <p class="mt-4 leading-relaxed text-humo">{pieza.texto}</p>
             </div>
           </article>
         ))

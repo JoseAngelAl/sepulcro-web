@@ -18,34 +18,30 @@ const unidades = [
 ---
 
 <div
-  class="relative overflow-hidden rounded-3xl border border-oro/30 bg-morado-oscuro/95 p-7 text-crema shadow-elegante sm:p-10"
+  class="relative flex flex-col border border-candela/30 bg-noche-profunda p-7 sm:p-10"
   data-countdown
   data-fecha={fecha}
 >
-  <div class="pointer-events-none absolute -right-16 -top-16 h-52 w-52 rounded-full bg-oro/10 blur-3xl"></div>
+  <span class="regla absolute left-0 top-0"></span>
 
-  <div class="relative">
-    <p class="text-xs font-semibold uppercase tracking-amplio text-oro">Próxima cita</p>
-    <h3 class="mt-2 font-display text-2xl font-semibold text-crema sm:text-3xl">{titulo}</h3>
-    <p class="mt-1 text-sm text-crema/70">{dia} · {hora} h{lugar ? ` · ${lugar}` : ''}</p>
+  <p class="etiqueta">Próxima procesión</p>
+  <h3 class="mt-2 font-display text-2xl font-medium text-lienzo sm:text-3xl">{titulo}</h3>
+  <p class="mt-2 text-sm text-lienzo/60">{dia}, {hora} h{lugar ? `. ${lugar}` : ''}</p>
 
-    <div data-countdown-grid class="mt-7 grid grid-cols-4 gap-2 sm:gap-4">
-      {
-        unidades.map((u) => (
-          <div class="rounded-2xl border border-crema/10 bg-crema/5 px-2 py-4 text-center">
-            <span data-unidad={u.clave} class="block font-display text-3xl font-semibold tabular-nums text-oro sm:text-4xl">
-              00
-            </span>
-            <span class="mt-1 block text-[0.6rem] font-semibold uppercase tracking-amplio text-crema/60 sm:text-xs">
-              {u.etiqueta}
-            </span>
-          </div>
-        ))
-      }
-    </div>
-
-    <p data-countdown-mensaje class="mt-5 hidden text-center text-sm font-semibold text-oro"></p>
+  <div data-countdown-grid class="mt-8 grid grid-cols-4 gap-2 sm:gap-4">
+    {
+      unidades.map((u) => (
+        <div class="border-t border-lienzo/15 pt-4 text-center">
+          <span data-unidad={u.clave} class="block font-display text-3xl font-medium tabular-nums text-candela sm:text-4xl">
+            00
+          </span>
+          <span class="mt-1 block text-[0.68rem] tracking-wide text-lienzo/55">{u.etiqueta}</span>
+        </div>
+      ))
+    }
   </div>
+
+  <p data-countdown-mensaje class="mt-6 hidden text-sm font-semibold text-candela"></p>
 </div>
 
 <script>
@@ -74,7 +70,7 @@ const unidades = [
         if (mensaje) {
           mensaje.textContent =
             diff <= 0 && !Number.isNaN(fechaObjetivo)
-              ? '¡Ha llegado el día! Que la Cofradía salga con gloria.'
+              ? '¡Ha llegado el día! Que la cofradía salga con gloria.'
               : 'Fechas de procesión pendientes de confirmar.';
           mensaje.classList.remove('hidden');
         }
